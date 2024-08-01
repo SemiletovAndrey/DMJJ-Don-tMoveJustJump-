@@ -91,7 +91,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3354187481478554717}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 24a5445c5430a95459c9da39583983f0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5310333797595596984}
   - component: {fileID: 3136502347927070214}
+  - component: {fileID: 873387667862094624}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -146,12 +147,12 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4629240710655863854}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Mass: 3
+  m_Drag: 1
+  m_AngularDrag: 0.5
+  m_CenterOfMass: {x: 0, y: 1.5, z: 0}
+  m_InertiaTensor: {x: 0.5, y: 0.5, z: 0.5}
+  m_InertiaRotation: {x: 0.0017453256, y: -0.0000030461708, z: 0.0017453256, w: 0.9999969}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -165,3 +166,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &873387667862094624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4629240710655863854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824ea39ff7d54f54babd865b7b161db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementForce: 3
+  JumpForce: 25
+  RbPlyer: {fileID: 3136502347927070214}
+  _isJumped: 0
+  _isTriggered: 0

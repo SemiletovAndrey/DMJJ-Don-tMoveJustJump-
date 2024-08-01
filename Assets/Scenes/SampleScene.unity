@@ -123,33 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &314060473 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4629240710655863854, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-  m_PrefabInstance: {fileID: 2189777672152881467}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &314060474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314060473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 824ea39ff7d54f54babd865b7b161db6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementForce: 2
-  JumpForce: 25
-  RbPlyer: {fileID: 314060475}
-  _isJumped: 0
-  _isTriggered: 0
---- !u!54 &314060475 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-  m_PrefabInstance: {fileID: 2189777672152881467}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,58 +692,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_Drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_Mass
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_ImplicitCom
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_CenterOfMass.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_ImplicitTensor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_InertiaTensor.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_InertiaTensor.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_InertiaTensor.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_InertiaRotation.w
-      value: 0.9999969
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_InertiaRotation.x
-      value: 0.0017453256
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_InertiaRotation.y
-      value: -0.0000030461708
-      objectReference: {fileID: 0}
-    - target: {fileID: 3136502347927070214, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_InertiaRotation.z
-      value: 0.0017453256
-      objectReference: {fileID: 0}
     - target: {fileID: 4629240710655863854, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -815,17 +736,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9127693642622417037, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 24a5445c5430a95459c9da39583983f0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4629240710655863854, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 314060474}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
 --- !u!1001 &6899846295641303774
 PrefabInstance:

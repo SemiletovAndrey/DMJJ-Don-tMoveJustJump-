@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandaloneIputSystem : InputService
+public class StandaloneInputSystem : InputService
 {
 
     public override Vector2 Axis {

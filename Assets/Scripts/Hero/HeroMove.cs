@@ -18,7 +18,6 @@ public class HeroMove : MonoBehaviour
     public void Construct(IInputService inputService)
     {
         _inputService = inputService;
-        Debug.Log($"{_inputService}");
     }
 
 

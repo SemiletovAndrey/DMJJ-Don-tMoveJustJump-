@@ -7,7 +7,6 @@ public class ProjectContextInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Debug.Log("Bindings");
         BindInputServices();
     }
 
@@ -15,7 +14,7 @@ public class ProjectContextInstaller : MonoInstaller
     {
         if (Application.isEditor)
         {
-            Container.Bind<IInputService>().To<StandaloneIputSystem>().AsSingle();
+            Container.Bind<IInputService>().To<StandaloneInputSystem>().AsSingle();
         }
         else if (Application.isMobilePlatform)
         {
