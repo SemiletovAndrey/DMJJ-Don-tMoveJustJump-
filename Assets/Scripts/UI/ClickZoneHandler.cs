@@ -7,7 +7,12 @@ using UnityEngine.UI;
 public class ClickZoneHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Image targetImage;
-    [SerializeField] private RectTransform targetTransform;
+    private RectTransform targetTransform;
+
+    private void Awake()
+    {
+        targetTransform = GetComponent<RectTransform>();
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

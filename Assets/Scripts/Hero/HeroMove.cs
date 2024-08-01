@@ -3,7 +3,8 @@ using Zenject;
 
 public class HeroMove : MonoBehaviour
 {
-    [SerializeField] private float MovementForce = 2;
+    [SerializeField] private float MovementForceOnAir = 2;
+    [SerializeField] private float MovementForceOnGround = 1.5f;
     [SerializeField] private float JumpForce = 50;
     [SerializeField] private Rigidbody RbPlyer;
 
@@ -28,24 +29,9 @@ public class HeroMove : MonoBehaviour
 
     private void Update()
     {
-        Vector3 movementVector = Vector3.zero;
-        if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
-        {
-            movementVector = new Vector3(_inputService.Axis.x, 0, _inputService.Axis.y);
-            movementVector.Normalize();
-            RbPlyer.AddForce(movementVector * MovementForce, ForceMode.Force);
-        }
-        if (!_isJumped)
-        {
-            if (_inputService.IsJumpButtonUp())
-            {
-                RbPlyer.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-                _isJumped = true;
-                _isTriggered = false;
-
-            }
-        }
+        MoveHandler();
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,4 +41,33 @@ public class HeroMove : MonoBehaviour
             _isTriggered = true;
         }
     }
+
+    private void MoveHandler()
+    {
+        Vector3 movementVector = Vector3.zero;
+        if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
+        {
+            movementVector = new Vector3(_inputService.Axis.x, 0, _inputService.Axis.y);
+            movementVector.Normalize();
+            if (!_isJumped)
+            {
+                RbPlyer.AddForce(movementVector * MovementForceOnGround, ForceMode.Force);
+            }
+            else if (_isJumped)
+            {
+                RbPlyer.AddForce(movementVector * MovementForceOnAir, ForceMode.Force);
+            }
+
+        }
+        if (!_isJumped)
+        {
+            if (_inputService.IsJumpButtonUp())
+            {
+                RbPlyer.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+                _isJumped = true;
+                _isTriggered = false;
+            }
+        }
+    }
+
 }
