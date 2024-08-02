@@ -47,7 +47,8 @@ public class HeroMove : MonoBehaviour
         Vector3 movementVector = Vector3.zero;
         if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
         {
-            movementVector = new Vector3(_inputService.Axis.x, 0, _inputService.Axis.y);
+            movementVector = _camera.transform.TransformDirection(_inputService.Axis);
+            movementVector.y = 0;
             movementVector.Normalize();
             if (!_isJumped)
             {

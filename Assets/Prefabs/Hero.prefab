@@ -129,7 +129,7 @@ Rigidbody:
   m_Mass: 3
   m_Drag: 1
   m_AngularDrag: 0.4
-  m_CenterOfMass: {x: 0, y: 1.5, z: 0}
+  m_CenterOfMass: {x: 0, y: 0.6, z: 0}
   m_InertiaTensor: {x: 0.5, y: 0.5, z: 0.5}
   m_InertiaRotation: {x: 0.0017453256, y: -0.0000030461708, z: 0.0017453256, w: 0.9999969}
   m_IncludeLayers:
@@ -138,7 +138,7 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
+  m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -176,7 +176,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayTimeDeath: 10
-  _isLieDown: 0
+  _changeColorService:
+    _originalColors: {r: 0, g: 0, b: 0, a: 0}
+    _targetColor: {r: 0, g: 0, b: 0, a: 0}
+    _currentColor: {r: 0, g: 0, b: 0, a: 0}
+  _renderers: {fileID: 6254731486707203164}
 --- !u!1 &6960604505444698111
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,9 +192,8 @@ GameObject:
   - component: {fileID: 4703032216289827577}
   - component: {fileID: 2547582904930779788}
   - component: {fileID: 7050164695986426401}
-  - component: {fileID: 9062172516698338677}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,27 +264,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9062172516698338677
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6960604505444698111}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8042264296325672012
 GameObject:
   m_ObjectHideFlags: 0

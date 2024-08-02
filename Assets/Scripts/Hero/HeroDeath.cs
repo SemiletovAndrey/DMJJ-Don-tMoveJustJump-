@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroDeath : MonoBehaviour
@@ -11,11 +10,15 @@ public class HeroDeath : MonoBehaviour
 
     private Coroutine _coroutineDeath;
     private bool _isLieDown = false;
+    [SerializeField] private ChangeColorService _changeColorService;
+    [SerializeField] private Renderer _renderers;
 
 
     private void Start()
     {
+        //_renderers = gameObject.GetComponentsInChildren<Renderer>();
         OnDeath += OnDeathHandler;
+        _changeColorService = new ChangeColorService(_renderers);
     }
 
     private void OnDestroy()
@@ -47,11 +50,12 @@ public class HeroDeath : MonoBehaviour
             if (CheckUpCharacter())
             {
                 _coroutineDeath = null;
+                _changeColorService.ResetColor();
                 Debug.Log("Up ");
                 yield break;
             }
             elapsed += Time.deltaTime;
-            ChangeColor(elapsed);
+            _changeColorService.ChangeColor(elapsed/delayTimeDeath);
             yield return null;
         }
         OnDeath?.Invoke();
@@ -68,11 +72,6 @@ public class HeroDeath : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    private void ChangeColor(float elapsed)
-    {
-        //TO DO
     }
 
     private void OnDeathHandler()

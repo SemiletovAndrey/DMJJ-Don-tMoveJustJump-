@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -274,11 +275,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 50
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -302,13 +303,30 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15057068, y: -0, z: -0, w: 0.9885993}
-  m_LocalPosition: {x: 0, y: 4.623, z: -4.76}
+  m_LocalRotation: {x: 0.32507297, y: 0, z: 0, w: 0.94568896}
+  m_LocalPosition: {x: 0, y: 7.32, z: -5.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 17.32, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 37.94, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b9c7a36e281dc4fb188015ddb83641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _following: {fileID: 1411530941}
+  RotationAngleX: 40
+  Distance: 10
+  offsetY: 2
+  rotationSpeed: 100
 --- !u!1 &1090027697
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +528,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209665240}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1411530941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5310333797595596984, guid: f7c8eb193ffbc234d93c684c22e7a411, type: 3}
+  m_PrefabInstance: {fileID: 2189777672152881467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1445865566
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,7 +546,7 @@ GameObject:
   - component: {fileID: 1445865568}
   - component: {fileID: 1445865567}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground_plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
