@@ -1,6 +1,3 @@
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StandaloneInputSystem : InputService
@@ -24,7 +21,7 @@ public class StandaloneInputSystem : InputService
         {
             return true;
         }
-        else if (UnityEngine.Input.GetKeyDown(CodeJump))
+        else if (Input.GetKeyDown(CodeJump))
         {
             return true;
         }
@@ -32,10 +29,44 @@ public class StandaloneInputSystem : InputService
 
     }
 
+    public override bool IsTurnLeftCameraButton()
+    {
+        if (SimpleInput.GetButton(TurnLeftCamera))
+        {
+            return true;
+        }
+        else if (Input.GetKey(CodeTurnRightCamera))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public override bool IsTurnRightCameraButton()
+    {
+        if (SimpleInput.GetButton(TurnRightCamera))
+        {
+            return true;
+        }
+        else if (Input.GetKey(CodeTurnLeftCamera))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public override bool IsResetCameraButton()
+    {
+        if (Input.GetKey(CodeResetCamera))
+        {
+            return true;
+        }
+        return false;
+    }
+
     protected override Vector2 SimpleInputAxis() =>
         new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
 
     private static Vector2 UnityAxis() =>
-           new Vector2(UnityEngine.Input.GetAxis(Horizontal), UnityEngine.Input.GetAxis(Vertical));
-
+           new Vector2(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
 }

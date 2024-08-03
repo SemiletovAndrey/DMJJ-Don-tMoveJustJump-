@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class CameraFollower : MonoBehaviour
 {
@@ -15,13 +16,21 @@ public class CameraFollower : MonoBehaviour
     private float _currentRotationAngleY;
     private float _initialRotationAngleY = 0f;
     private float returnDuration = 0.2f;
+    private IInputService _inputService;
+
+    [Inject]
+    public void Construct(IInputService inputService)
+    {
+        _inputService = inputService;
+    }
+
 
     private void LateUpdate()
     {
         if (_following == null)
             return;
 
-        if (Input.GetKey(KeyCode.Q))
+        if (_inputService.IsTurnLeftCameraButton())
         {
             if (_currentRotationAngleY < -360)
             {
@@ -29,7 +38,7 @@ public class CameraFollower : MonoBehaviour
             }
             _currentRotationAngleY -= rotationSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.E))
+        if (_inputService.IsTurnRightCameraButton())
         {
             if (_currentRotationAngleY > 360)
             {
@@ -37,7 +46,7 @@ public class CameraFollower : MonoBehaviour
             }
             _currentRotationAngleY += rotationSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.R))
+        if (_inputService.IsResetCameraButton())
         {
             StartCoroutine(ReturnToInitialPosition());
         }

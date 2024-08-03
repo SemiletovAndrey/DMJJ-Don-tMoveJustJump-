@@ -772,6 +772,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2583483533449202496, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2583483533449202496, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2583483533449202496, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2583483533449202496, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2583483533449202496, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -485
+      objectReference: {fileID: 0}
+    - target: {fileID: 2583483533449202496, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: 2583483533449202496, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156737896067907005, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_Name
+      value: TurnCameraLeft_button
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231880105948530638, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: button.m_key
+      value: TurnLeftCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275976461133334606, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4531949218555211084, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
       propertyPath: m_Name
       value: Hud
@@ -855,6 +895,22 @@ PrefabInstance:
     - target: {fileID: 5074728803021911228, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5267025813434666074, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: button.m_key
+      value: TurnRightCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5372359896394777185, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -130
+      objectReference: {fileID: 0}
+    - target: {fileID: 5372359896394777185, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971852995358587953, guid: 83b56765ffab89a4895f781da9a6e269, type: 3}
+      propertyPath: m_Name
+      value: TurnCameraRight_button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

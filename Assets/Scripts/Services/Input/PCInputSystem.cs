@@ -9,6 +9,16 @@ public class PCInputSystem : InputService
     public override bool IsJumpButtonUp() =>
         Input.GetKeyDown(CodeJump);
 
+    public override bool IsTurnLeftCameraButton() => 
+        Input.GetKey(CodeTurnLeftCamera);
+
+    public override bool IsTurnRightCameraButton() => 
+        Input.GetKey(CodeTurnRightCamera);
+
+    public override bool IsResetCameraButton() => 
+        Input.GetKey(CodeResetCamera);
+
+
     protected override Vector2 SimpleInputAxis() => 
         new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
 }
