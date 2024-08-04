@@ -9,6 +9,7 @@ public abstract class InputService : IInputService
     protected const string Horizontal = "Horizontal";
     protected const string TurnRightCamera = "TurnRightCamera";
     protected const string TurnLeftCamera = "TurnLeftCamera";
+    protected const string ResetCamera = "ResetCamera";
 
     protected KeyCode CodeJump = KeyCode.Space;
     protected KeyCode CodeTurnLeftCamera = KeyCode.Q;

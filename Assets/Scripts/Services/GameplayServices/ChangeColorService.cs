@@ -1,38 +1,44 @@
 using System;
 using UnityEngine;
 
-[Serializable]
 public class ChangeColorService
 {
-    private Renderer _renderers;
-    private MaterialPropertyBlock _propertyBlocks;
-    [SerializeField] private Color _originalColors;
-    [SerializeField] private Color _targetColor = Color.red;
-    [SerializeField] private Color _currentColor;
+    private Renderer[] _renderers;
+    private MaterialPropertyBlock[] _propertyBlocks;
+    private Color[] _originalColors;
+    private Color _targetColor;
 
-    public ChangeColorService(Renderer renderers)
+    public ChangeColorService(Renderer[] renderers, Color targetColor)
     {
+        _targetColor = targetColor;
         _renderers = renderers;
-        _propertyBlocks = new MaterialPropertyBlock();
-        _renderers.GetPropertyBlock(_propertyBlocks);
-        _originalColors = _renderers.sharedMaterial.GetColor("_Color");
-        _currentColor = _originalColors;
-        _propertyBlocks.SetColor("_Color", _originalColors);
+        _propertyBlocks = new MaterialPropertyBlock[_renderers.Length];
+        _originalColors = new Color[_renderers.Length];
+        for (int i = 0; i < _renderers.Length; i++)
+        {
+            _propertyBlocks[i] = new MaterialPropertyBlock();
+            _renderers[i].GetPropertyBlock(_propertyBlocks[i]);
+            _originalColors[i] = _renderers[i].sharedMaterial.GetColor("_Color");
+            _propertyBlocks[i].SetColor("_Color", _originalColors[i]);
+        }
     }
 
     public void ChangeColor(float elapsed)
     {
-        _currentColor = _propertyBlocks.GetColor("_Color");
-        Color newColor = Color.Lerp(_originalColors, _targetColor, elapsed + 0.5f);
-        _propertyBlocks.SetColor("_Color", newColor);
-        _renderers.SetPropertyBlock(_propertyBlocks);
-
+        for (int i = 0; i < _renderers.Length; i++)
+        {
+            Color newColor = Color.Lerp(_originalColors[i], _targetColor, elapsed + 0.5f);
+            _propertyBlocks[i].SetColor("_Color", newColor);
+            _renderers[i].SetPropertyBlock(_propertyBlocks[i]);
+        }
     }
 
     public void ResetColor()
     {
-        _currentColor = _originalColors;
-        _propertyBlocks.SetColor("_Color", _originalColors);
-        _renderers.SetPropertyBlock(_propertyBlocks);
+        for (int i = 0; i < _renderers.Length; i++)
+        {
+            _propertyBlocks[i].SetColor("_Color", _originalColors[i]);
+            _renderers[i].SetPropertyBlock(_propertyBlocks[i]);
+        }
     }
 }

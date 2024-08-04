@@ -11,14 +11,15 @@ public class HeroDeath : MonoBehaviour
     private Coroutine _coroutineDeath;
     private bool _isLieDown = false;
     [SerializeField] private ChangeColorService _changeColorService;
-    [SerializeField] private Renderer _renderers;
+    [SerializeField] private Renderer[] _renderers;
+    [SerializeField] private Color _targetColor;
 
 
     private void Start()
     {
-        //_renderers = gameObject.GetComponentsInChildren<Renderer>();
+        _renderers = gameObject.GetComponentsInChildren<Renderer>();
         OnDeath += OnDeathHandler;
-        _changeColorService = new ChangeColorService(_renderers);
+        _changeColorService = new ChangeColorService(_renderers, _targetColor);
     }
 
     private void OnDestroy()

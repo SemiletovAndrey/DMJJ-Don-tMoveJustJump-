@@ -16,7 +16,7 @@ public class PCInputSystem : InputService
         Input.GetKey(CodeTurnRightCamera);
 
     public override bool IsResetCameraButton() => 
-        Input.GetKey(CodeResetCamera);
+        Input.GetKeyDown(CodeResetCamera);
 
 
     protected override Vector2 SimpleInputAxis() => 

@@ -3,7 +3,8 @@ using UnityEngine;
 public class StandaloneInputSystem : InputService
 {
 
-    public override Vector2 Axis {
+    public override Vector2 Axis
+    {
         get
         {
             Vector2 axis = SimpleInputAxis();
@@ -57,7 +58,11 @@ public class StandaloneInputSystem : InputService
 
     public override bool IsResetCameraButton()
     {
-        if (Input.GetKey(CodeResetCamera))
+        if (Input.GetKeyDown(CodeResetCamera))
+        {
+            return true;
+        }
+        else if (SimpleInput.GetButtonDown(ResetCamera))
         {
             return true;
         }
