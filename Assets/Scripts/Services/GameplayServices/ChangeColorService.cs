@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public class ChangeColorService
 {
@@ -10,8 +11,8 @@ public class ChangeColorService
 
     public ChangeColorService(Renderer[] renderers, Color targetColor)
     {
-        _targetColor = targetColor;
         _renderers = renderers;
+        _targetColor = targetColor;
         _propertyBlocks = new MaterialPropertyBlock[_renderers.Length];
         _originalColors = new Color[_renderers.Length];
         for (int i = 0; i < _renderers.Length; i++)

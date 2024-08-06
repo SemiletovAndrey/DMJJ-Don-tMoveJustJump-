@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class HeroDeath : MonoBehaviour
 {
@@ -10,16 +11,22 @@ public class HeroDeath : MonoBehaviour
 
     private Coroutine _coroutineDeath;
     private bool _isLieDown = false;
-    [SerializeField] private ChangeColorService _changeColorService;
+    private ChangeColorService _changeColorService;
+    [SerializeField] private ShakingObjectService _shakingObjectService;
     [SerializeField] private Renderer[] _renderers;
-    [SerializeField] private Color _targetColor;
+    [SerializeField] private float maxShakeAmount;
+    [SerializeField] private float _frequency;
+    [SerializeField] private Transform transformShaking;
 
+
+    [Inject] public Color targetColor;
 
     private void Start()
     {
         _renderers = gameObject.GetComponentsInChildren<Renderer>();
         OnDeath += OnDeathHandler;
-        _changeColorService = new ChangeColorService(_renderers, _targetColor);
+        _changeColorService = new ChangeColorService(_renderers, targetColor);
+        _shakingObjectService = new ShakingObjectService(transformShaking, maxShakeAmount, _frequency);
     }
 
     private void OnDestroy()
@@ -52,11 +59,20 @@ public class HeroDeath : MonoBehaviour
             {
                 _coroutineDeath = null;
                 _changeColorService.ResetColor();
+                _shakingObjectService.ResetPosition();
                 Debug.Log("Up ");
                 yield break;
             }
             elapsed += Time.deltaTime;
-            _changeColorService.ChangeColor(elapsed/delayTimeDeath);
+            if (elapsed <= delayTimeDeath / 2)
+            {
+                _changeColorService.ChangeColor(elapsed / delayTimeDeath);
+            }
+            else
+            {
+                Debug.Log("Shake");
+                _shakingObjectService.Shake(elapsed / delayTimeDeath);
+            }
             yield return null;
         }
         OnDeath?.Invoke();
@@ -78,6 +94,7 @@ public class HeroDeath : MonoBehaviour
     private void OnDeathHandler()
     {
         Debug.Log("Die");
+        _shakingObjectService.ResetPosition();
         StopCoroutine(_coroutineDeath);
     }
 }

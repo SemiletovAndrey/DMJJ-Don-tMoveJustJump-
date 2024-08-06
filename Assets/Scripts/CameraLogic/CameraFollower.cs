@@ -15,7 +15,7 @@ public class CameraFollower : MonoBehaviour
 
     private float _currentRotationAngleY;
     private float _initialRotationAngleY = 0f;
-    private float returnDuration = 0.2f;
+    private float returnDuration = 0.4f;
     private IInputService _inputService;
 
     [Inject]
