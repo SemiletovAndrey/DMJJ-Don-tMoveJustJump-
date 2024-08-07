@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class ProjectContextInstaller : MonoInstaller
+public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
 {
+    [SerializeField] private LoadingCurtain loadingCurtain;
     public override void InstallBindings()
     {
         BindInputServices();
+
+        Container.Bind<SceneLoader>().FromNew().AsSingle().WithArguments(this).NonLazy();
+        Container.Bind<IStateFactory>().To<StateFactory>().AsSingle().NonLazy();
+        Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle().OnInstantiated<GameStateMachine>((context, machine) => machine.InitializeStates());
+
+        Container.Bind<LoadingCurtain>().FromComponentInNewPrefab(loadingCurtain).AsSingle();
     }
 
     private void BindInputServices()
