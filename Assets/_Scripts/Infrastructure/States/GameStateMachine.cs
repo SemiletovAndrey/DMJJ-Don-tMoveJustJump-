@@ -20,6 +20,7 @@ public class GameStateMachine : IGameStateMachine
         _states[typeof(BootstrapState)] = _stateFactory.CreateBootstrapState();
         _states[typeof(LoadProgressState)] = _stateFactory.CreateLoadProgressState();
         _states[typeof(LoadLevelState)] = _stateFactory.CreateLoadLevelState();
+        _states[typeof(MainMenuState)] = _stateFactory.CreateMainMenuState();
         _states[typeof(GameLoopState)] = _stateFactory.CreateGameLoopState();
         Debug.Log("StatesInitialize");
 

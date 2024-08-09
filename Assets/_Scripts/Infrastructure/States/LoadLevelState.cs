@@ -11,13 +11,15 @@ public class LoadLevelState : IPayloadState<string>
     private readonly IGameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _curtain;
+    private IEntityFactory _entityFactory;
 
     [Inject]
-    public LoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain)
+    public LoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IEntityFactory entityFactory)
     {
         this._gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
         _curtain = curtain;
+        _entityFactory = entityFactory;
     }
 
 
@@ -34,20 +36,18 @@ public class LoadLevelState : IPayloadState<string>
 
     private void OnLoad()
     {
-        Debug.Log("OnLoad");
-        //GameObject initialPoint = GameObject.FindWithTag(InitialPointTag);
-        //GameObject hero = Instantiate(AssetAddress.HeroPath, initialPoint.transform.position);
-        //Instantiate(AssetAddress.HudPath);
+        Vector3 positionPlayer = GameObject.FindWithTag(InitialPointTag).transform.position;
+        GameObject player = _entityFactory.CreatePlayer(positionPlayer);
+        GameObject hud = _entityFactory.CreateHud();
+        CameraFollow(player);
         _gameStateMachine.Enter<GameLoopState>();
+        Debug.Log("OnLoad");
+
     }
 
-    private void Instantiate(string hudPath)
+    
+    private void CameraFollow(GameObject hero)
     {
-        throw new NotImplementedException();
-    }
-
-    private GameObject Instantiate(string heroPath, Vector3 position)
-    {
-        throw new NotImplementedException();
+        Camera.main.GetComponent<CameraFollower>().Follow(hero);
     }
 }

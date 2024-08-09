@@ -32,5 +32,10 @@ public class StateFactory : IStateFactory
     {
         return _container.Instantiate<LoadProgressState>();
     }
+    
+    public MainMenuState CreateMainMenuState()
+    {
+        return _container.Instantiate<MainMenuState>();
+    }
 
 }

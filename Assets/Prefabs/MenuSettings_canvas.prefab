@@ -720,7 +720,7 @@ GameObject:
   - component: {fileID: 7495467483328375443}
   - component: {fileID: 6313646305415481040}
   m_Layer: 5
-  m_Name: MenuPause_canvas
+  m_Name: MenuSettings_canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

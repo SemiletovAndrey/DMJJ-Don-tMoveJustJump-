@@ -178,7 +178,10 @@ MonoBehaviour:
   delayTimeDeath: 10
   _renderers:
   - {fileID: 0}
-  _targetColor: {r: 0.5406468, g: 1, b: 0.2999999, a: 1}
+  maxShakeAmount: 0.05
+  _frequency: 20
+  transformShaking: {fileID: 4324439789101331060}
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6960604505444698111
 GameObject:
   m_ObjectHideFlags: 0

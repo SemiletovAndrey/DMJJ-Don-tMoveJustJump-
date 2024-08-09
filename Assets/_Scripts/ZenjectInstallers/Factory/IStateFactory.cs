@@ -4,4 +4,5 @@
     public LoadProgressState CreateLoadProgressState();
     public LoadLevelState CreateLoadLevelState();
     public GameLoopState CreateGameLoopState();
+    public MainMenuState CreateMainMenuState();
 }

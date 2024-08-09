@@ -18,14 +18,19 @@ public class HeroDeath : MonoBehaviour
     [SerializeField] private float _frequency;
     [SerializeField] private Transform transformShaking;
 
+    private CharacterSettings _characterSettings;
 
-    [Inject] public Color targetColor;
+    [Inject]
+    public void Construct(CharacterSettings characterSettings)
+    {
+        _characterSettings = characterSettings;
+    }
 
     private void Start()
     {
         _renderers = gameObject.GetComponentsInChildren<Renderer>();
         OnDeath += OnDeathHandler;
-        _changeColorService = new ChangeColorService(_renderers, targetColor);
+        _changeColorService = new ChangeColorService(_renderers, _characterSettings.heroDeathColor);
         _shakingObjectService = new ShakingObjectService(transformShaking, maxShakeAmount, _frequency);
     }
 

@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Zenject;
 
 public class BootstrapState : IState
 {
     private const string Initial = "Init";
-    private const string LevelTestName = "SampleScene";
-    
+    private const string MainMenuName = "MainMenuScene";
+
     private readonly IGameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
 
@@ -26,7 +25,13 @@ public class BootstrapState : IState
 
     private void EnterLevelLoad()
     {
-        _gameStateMachine.Enter<LoadLevelState, string>(LevelTestName);
+        _sceneLoader.Load(MainMenuName, OnLoad);
+
+    }
+
+    private void OnLoad()
+    {
+        _gameStateMachine.Enter<MainMenuState>();
     }
 
     public void Exit()

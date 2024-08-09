@@ -8,7 +8,6 @@ public class LoadingCurtain : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
     }
 
     public void Show()
