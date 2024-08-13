@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GraphicsSettings
+public class PlayerProgress
 {
-    Low,
-    Medium,
-    High
+    
 }

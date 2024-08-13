@@ -19,7 +19,6 @@ public class BootstrapState : IState
 
     public void Enter()
     {
-        Debug.Log("Enter Bootstrap State");
         _sceneLoader.Load(Initial, EnterLevelLoad);
     }
 
@@ -31,7 +30,7 @@ public class BootstrapState : IState
 
     private void OnLoad()
     {
-        _gameStateMachine.Enter<MainMenuState>();
+        _gameStateMachine.Enter<LoadSettingsState>();
     }
 
     public void Exit()

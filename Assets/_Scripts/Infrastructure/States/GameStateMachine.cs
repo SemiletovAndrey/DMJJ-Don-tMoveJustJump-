@@ -18,12 +18,11 @@ public class GameStateMachine : IGameStateMachine
     public void InitializeStates()
     {
         _states[typeof(BootstrapState)] = _stateFactory.CreateBootstrapState();
+        _states[typeof(LoadSettingsState)] = _stateFactory.CreateLoadSettingsState();
         _states[typeof(LoadProgressState)] = _stateFactory.CreateLoadProgressState();
         _states[typeof(LoadLevelState)] = _stateFactory.CreateLoadLevelState();
         _states[typeof(MainMenuState)] = _stateFactory.CreateMainMenuState();
         _states[typeof(GameLoopState)] = _stateFactory.CreateGameLoopState();
-        Debug.Log("StatesInitialize");
-
     }
 
     public void Enter<TState>() where TState : class, IState

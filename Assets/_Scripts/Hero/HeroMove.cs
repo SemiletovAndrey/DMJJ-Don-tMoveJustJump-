@@ -3,22 +3,22 @@ using Zenject;
 
 public class HeroMove : MonoBehaviour
 {
-    [SerializeField] private float MovementForceOnAir = 2;
-    [SerializeField] private float MovementForceOnGround = 1.5f;
-    [SerializeField] private float JumpForce = 50;
     [SerializeField] private Rigidbody RbPlyer;
 
-    [SerializeField] private IInputService _inputService;
+    private IInputService _inputService;
+    private CharacterSettings _characterSettings;
     private Camera _camera;
 
     [SerializeField] private bool _isJumped = false;
     [SerializeField] private bool _isTriggered = false;
 
 
+
     [Inject]
-    public void Construct(IInputService inputService)
+    public void Construct(IInputService inputService, CharacterSettings characterSettings)
     {
         _inputService = inputService;
+        _characterSettings = characterSettings;
     }
 
 
@@ -52,11 +52,11 @@ public class HeroMove : MonoBehaviour
             movementVector.Normalize();
             if (!_isJumped)
             {
-                RbPlyer.AddForce(movementVector * MovementForceOnGround, ForceMode.Force);
+                RbPlyer.AddForce(movementVector * _characterSettings.MovementForceOnGround, ForceMode.Force);
             }
             else if (_isJumped)
             {
-                RbPlyer.AddForce(movementVector * MovementForceOnAir, ForceMode.Force);
+                RbPlyer.AddForce(movementVector * _characterSettings.MovementForceOnAir, ForceMode.Force);
             }
 
         }
@@ -64,7 +64,7 @@ public class HeroMove : MonoBehaviour
         {
             if (_inputService.IsJumpButtonUp())
             {
-                RbPlyer.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+                RbPlyer.AddForce(Vector3.up * _characterSettings.JumpForce, ForceMode.Impulse);
                 _isJumped = true;
                 _isTriggered = false;
             }

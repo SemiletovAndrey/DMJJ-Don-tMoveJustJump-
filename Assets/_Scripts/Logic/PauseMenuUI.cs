@@ -1,14 +1,12 @@
-using System;
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class MainMenuUI : MonoBehaviour
+public class PauseMenuUI : MonoBehaviour
 {
-    public Canvas SettingsCanvas;
-    public Action OnStartGameClicked;
-    public Action OnSettingsClicked;
+    public Canvas PauseCanvas;
 
     private ISaveSettingsService _saveSettingsService;
     private SettingsData _settingsData;
@@ -16,9 +14,7 @@ public class MainMenuUI : MonoBehaviour
     [Inject(Id = "MusicSlider")] private Slider _musicSlider;
     [Inject(Id = "SoundSlider")] private Slider _soundSlider;
     [Inject(Id = "SensitivitySlider")] private Slider _sensitivitySlider;
-    [Inject(Id = "GraphicQuality")] private TMP_Dropdown _graphicQualityDropdown;
-    [Inject(Id = "LockFPS")] private Toggle _lockFPSToggle;
-    [Inject(Id = "Language")] private TMP_Dropdown _languageDropdown;
+    
 
     [Inject]
     public void Construct(ISaveSettingsService saveSettingsService)
@@ -29,21 +25,12 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
-        SettingsCanvas.gameObject.SetActive(false);
+        PauseCanvas.gameObject.SetActive(false);
         _settingsData = _saveSettingsService.LoadSettings();
         SetSettingsInStart();
     }
 
-    public void StartGameButton()
-    {
-        OnStartGameClicked?.Invoke();
-    }
-
-    public void SettingsButton()
-    {
-        OnSettingsClicked?.Invoke();
-    }
-
+   
     public void ExitButton()
     {
         Application.Quit();
@@ -52,7 +39,7 @@ public class MainMenuUI : MonoBehaviour
     public void ApplyAndContinue()
     {
         ApplySettings();
-        SettingsCanvas.gameObject.SetActive(false);
+        PauseCanvas.gameObject.SetActive(false);
     }
 
     private void ApplySettings()
@@ -67,10 +54,7 @@ public class MainMenuUI : MonoBehaviour
         settingsData.MusicVolume = _musicSlider.value;
         settingsData.SoundVolume = _soundSlider.value;
         settingsData.Sensitivity = _sensitivitySlider.value;
-        settingsData.LockFPS = _lockFPSToggle.isOn;
-        settingsData.Language = DropdownEnumUtility.GetSelectedEnumValue<LanguageEnum>(_languageDropdown);
-        settingsData.GraphicsSettings = DropdownEnumUtility.GetSelectedEnumValue<GraphicsSettingsEnum>(_graphicQualityDropdown);
-
+        
         return settingsData;
     }
 
@@ -79,8 +63,5 @@ public class MainMenuUI : MonoBehaviour
         _musicSlider.value = _settingsData.MusicVolume;
         _soundSlider.value = _settingsData.SoundVolume;
         _sensitivitySlider.value = _settingsData.Sensitivity;
-        _lockFPSToggle.isOn = _settingsData.LockFPS;
-        DropdownEnumUtility.SetupDropdown(_languageDropdown, _settingsData.Language);
-        DropdownEnumUtility.SetupDropdown(_graphicQualityDropdown, _settingsData.GraphicsSettings);
     }
 }

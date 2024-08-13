@@ -15,6 +15,10 @@ public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
         EntityFactoryBindings();
 
         Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
+
+        Container.Bind<IPersistantProgressService>().To<PersistantProgressService>().AsSingle();
+        Container.Bind<ISaveSettingsService>().To<SaveLoadSettingService>().AsSingle();
+        Container.Bind<ISaveProgressService>().To<SaveLoadProgressService>().AsSingle();
     }
 
     private void GameStateMachineBindings()

@@ -38,4 +38,8 @@ public class StateFactory : IStateFactory
         return _container.Instantiate<MainMenuState>();
     }
 
+    public LoadSettingsState CreateLoadSettingsState()
+    {
+        return _container.Instantiate<LoadSettingsState>();
+    }
 }
