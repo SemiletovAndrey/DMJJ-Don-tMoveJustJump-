@@ -19,6 +19,20 @@ public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
         Container.Bind<IPersistantProgressService>().To<PersistantProgressService>().AsSingle();
         Container.Bind<ISaveSettingsService>().To<SaveLoadSettingService>().AsSingle();
         Container.Bind<ISaveProgressService>().To<SaveLoadProgressService>().AsSingle();
+        Container.Bind<SettingsData>().FromMethod(context =>
+        {
+            ISaveSettingsService saveSettingsService = context.Container.Resolve<ISaveSettingsService>();
+            SettingsData loadedData = saveSettingsService.LoadSettings();
+
+            return new SettingsData
+            {
+                Language = loadedData.Language,
+                SoundVolume = loadedData.SoundVolume,
+                MusicVolume = loadedData.MusicVolume,
+                Sensitivity = loadedData.Sensitivity,
+                GraphicsSettings = loadedData.GraphicsSettings
+            };
+        }).AsSingle();
     }
 
     private void GameStateMachineBindings()

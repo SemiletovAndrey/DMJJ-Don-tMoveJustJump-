@@ -17,8 +17,10 @@ public class PCInputSystem : InputService
 
     public override bool IsResetCameraButton() => 
         Input.GetKeyDown(CodeResetCamera);
-
+    public override bool IsMenuPause() => 
+        Input.GetKeyDown(CodePause);
 
     protected override Vector2 SimpleInputAxis() => 
         new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
+
 }

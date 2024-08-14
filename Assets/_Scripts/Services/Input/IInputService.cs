@@ -9,4 +9,5 @@ public interface IInputService
     public bool IsTurnLeftCameraButton();
     public bool IsTurnRightCameraButton();
     public bool IsResetCameraButton();
+    public bool IsMenuPause();
 }

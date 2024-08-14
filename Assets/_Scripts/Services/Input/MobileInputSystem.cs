@@ -17,6 +17,8 @@ public class MobileInputSystem : InputService
 
     public override bool IsResetCameraButton() => 
         SimpleInput.GetButton(ResetCamera);
+    public override bool IsMenuPause() => 
+        SimpleInput.GetButton(Pause);
 
     protected override Vector2 SimpleInputAxis() =>
         new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));

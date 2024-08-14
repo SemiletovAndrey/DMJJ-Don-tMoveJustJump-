@@ -9,6 +9,7 @@ public class PauseMenuUI : MonoBehaviour
     public Canvas PauseCanvas;
 
     private ISaveSettingsService _saveSettingsService;
+    private IInputService _inputService;
     private SettingsData _settingsData;
 
     [Inject(Id = "MusicSlider")] private Slider _musicSlider;
@@ -17,20 +18,28 @@ public class PauseMenuUI : MonoBehaviour
     
 
     [Inject]
-    public void Construct(ISaveSettingsService saveSettingsService)
+    public void Construct(ISaveSettingsService saveSettingsService, IInputService inputService, SettingsData settingsData)
     {
         _saveSettingsService = saveSettingsService;
+        _inputService = inputService;
+        _settingsData = settingsData;
     }
 
 
     private void Start()
     {
         PauseCanvas.gameObject.SetActive(false);
-        _settingsData = _saveSettingsService.LoadSettings();
         SetSettingsInStart();
     }
 
-   
+    private void Update()
+    {
+        if (_inputService.IsMenuPause())
+        {
+            ActivePause();
+        }
+    }
+
     public void ExitButton()
     {
         Application.Quit();
@@ -40,6 +49,18 @@ public class PauseMenuUI : MonoBehaviour
     {
         ApplySettings();
         PauseCanvas.gameObject.SetActive(false);
+    }
+
+    public void SetSettingsInStart()
+    {
+        _musicSlider.value = _settingsData.MusicVolume;
+        _soundSlider.value = _settingsData.SoundVolume;
+        _sensitivitySlider.value = _settingsData.Sensitivity;
+    }
+
+    public void OnSensitivityValue(float sensitivity)
+    {
+        _settingsData.Sensitivity = sensitivity;
     }
 
     private void ApplySettings()
@@ -58,10 +79,8 @@ public class PauseMenuUI : MonoBehaviour
         return settingsData;
     }
 
-    public void SetSettingsInStart()
+    private void ActivePause()
     {
-        _musicSlider.value = _settingsData.MusicVolume;
-        _soundSlider.value = _settingsData.SoundVolume;
-        _sensitivitySlider.value = _settingsData.Sensitivity;
+        PauseCanvas.gameObject.SetActive(true);
     }
 }

@@ -21,16 +21,16 @@ public class MainMenuUI : MonoBehaviour
     [Inject(Id = "Language")] private TMP_Dropdown _languageDropdown;
 
     [Inject]
-    public void Construct(ISaveSettingsService saveSettingsService)
+    public void Construct(ISaveSettingsService saveSettingsService, SettingsData settingsData)
     {
         _saveSettingsService = saveSettingsService;
+        _settingsData = settingsData;
     }
 
 
     private void Start()
     {
         SettingsCanvas.gameObject.SetActive(false);
-        _settingsData = _saveSettingsService.LoadSettings();
         SetSettingsInStart();
     }
 

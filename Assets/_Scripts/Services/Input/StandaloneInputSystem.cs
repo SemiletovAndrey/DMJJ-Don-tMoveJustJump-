@@ -68,10 +68,23 @@ public class StandaloneInputSystem : InputService
         }
         return false;
     }
+    public override bool IsMenuPause()
+    {
+        if (Input.GetKeyDown(CodePause))
+        {
+            return true;
+        }
+        else if (SimpleInput.GetButtonDown(Pause))
+        {
+            return true;
+        }
+        return false;
+    }
 
     protected override Vector2 SimpleInputAxis() =>
         new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
 
     private static Vector2 UnityAxis() =>
            new Vector2(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
+
 }

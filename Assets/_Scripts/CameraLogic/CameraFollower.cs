@@ -11,17 +11,25 @@ public class CameraFollower : MonoBehaviour
     public float RotationAngleX;
     public float Distance;
     public float offsetY;
-    public float rotationSpeed = 100f;
 
+    [SerializeField] private float _rotationSpeed = 100f;
     private float _currentRotationAngleY;
     private float _initialRotationAngleY = 0f;
     private float returnDuration = 0.4f;
     private IInputService _inputService;
+    private SettingsData _settingsData;
 
     [Inject]
-    public void Construct(IInputService inputService)
+    public void Construct(IInputService inputService, SettingsData settingsData)
     {
         _inputService = inputService;
+        _settingsData = settingsData;
+    }
+
+    private void Start()
+    {
+        _rotationSpeed = _settingsData.Sensitivity;
+        _settingsData.OnSensitivityChanged += UpdateSensitivity;
     }
 
 
@@ -36,7 +44,7 @@ public class CameraFollower : MonoBehaviour
             {
                 _currentRotationAngleY = 0;
             }
-            _currentRotationAngleY -= rotationSpeed * Time.deltaTime;
+            _currentRotationAngleY -= _rotationSpeed * Time.deltaTime;
         }
         if (_inputService.IsTurnRightCameraButton())
         {
@@ -44,7 +52,7 @@ public class CameraFollower : MonoBehaviour
             {
                 _currentRotationAngleY = 0;
             }
-            _currentRotationAngleY += rotationSpeed * Time.deltaTime;
+            _currentRotationAngleY += _rotationSpeed * Time.deltaTime;
         }
         if (_inputService.IsResetCameraButton())
         {
@@ -56,6 +64,16 @@ public class CameraFollower : MonoBehaviour
         Vector3 position = rotation * new Vector3(0, 0, -Distance) + FollowingPointPosition();
         transform.position = position;
         transform.rotation = rotation;
+    }
+
+    private void OnDestroy()
+    {
+        _settingsData.OnSensitivityChanged -= UpdateSensitivity;
+    }
+
+    private void UpdateSensitivity(float sensitivity)
+    {
+        _rotationSpeed = _settingsData.Sensitivity;
     }
 
     public void Follow(GameObject following) =>
