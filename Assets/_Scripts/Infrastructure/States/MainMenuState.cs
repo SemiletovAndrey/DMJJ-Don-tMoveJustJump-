@@ -6,7 +6,7 @@ using Zenject;
 
 public class MainMenuState : IState
 {
-    private const string LevelTestName = "SampleScene";
+    private const string LevelTestName = "TrainRoom";
 
     private readonly IGameStateMachine _gameStateMachine;
     private MainMenuUI _mainMenuUI;
