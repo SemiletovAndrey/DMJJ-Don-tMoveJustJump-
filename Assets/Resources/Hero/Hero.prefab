@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7403823654682199044}
   - component: {fileID: 5299385065644098115}
   - component: {fileID: 6254731486707203164}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3136502347927070214}
   - component: {fileID: 873387667862094624}
   - component: {fileID: 2096554783817548101}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,9 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824ea39ff7d54f54babd865b7b161db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementForceOnAir: 2
-  MovementForceOnGround: 3
-  JumpForce: 25
   RbPlyer: {fileID: 3136502347927070214}
   _isJumped: 0
   _isTriggered: 0
@@ -178,10 +175,7 @@ MonoBehaviour:
   delayTimeDeath: 10
   _renderers:
   - {fileID: 0}
-  maxShakeAmount: 0.05
-  _frequency: 20
   transformShaking: {fileID: 4324439789101331060}
-  targetColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6960604505444698111
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +187,7 @@ GameObject:
   - component: {fileID: 4703032216289827577}
   - component: {fileID: 2547582904930779788}
   - component: {fileID: 7050164695986426401}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4324439789101331060}
   - component: {fileID: 5188314778024972660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

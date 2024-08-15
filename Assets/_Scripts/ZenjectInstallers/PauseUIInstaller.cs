@@ -15,5 +15,7 @@ public class PauseUIInstaller : MonoInstaller
         Container.Bind<Slider>().WithId("MusicSlider").FromInstance(MusicSlider);
         Container.Bind<Slider>().WithId("SoundSlider").FromInstance(SoundSlider);
         Container.Bind<Slider>().WithId("SensitivitySlider").FromInstance(SensitivitySlider);
+
+        Container.Bind<HeroDeath>().FromComponentInHierarchy().AsSingle();
     }
 }

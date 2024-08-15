@@ -6,7 +6,8 @@ using Zenject;
 
 public class PauseMenuUI : MonoBehaviour
 {
-    public Canvas PauseCanvas;
+    [SerializeField] private Canvas PauseCanvas;
+    [SerializeField] private Canvas DieCanvas;
 
     private ISaveSettingsService _saveSettingsService;
     private IInputService _inputService;
@@ -28,7 +29,9 @@ public class PauseMenuUI : MonoBehaviour
 
     private void Start()
     {
+        _settingsData = _saveSettingsService.LoadSettings();
         PauseCanvas.gameObject.SetActive(false);
+        DieCanvas.gameObject.SetActive(false);
         SetSettingsInStart();
     }
 
@@ -42,6 +45,7 @@ public class PauseMenuUI : MonoBehaviour
 
     public void ExitButton()
     {
+        Debug.Log("Exit");
         Application.Quit();
     }
 
@@ -61,6 +65,11 @@ public class PauseMenuUI : MonoBehaviour
     public void OnSensitivityValue(float sensitivity)
     {
         _settingsData.Sensitivity = sensitivity;
+    }
+
+    public void SetActiveRestartCanvas()
+    {
+        DieCanvas.gameObject.SetActive(true);
     }
 
     private void ApplySettings()
