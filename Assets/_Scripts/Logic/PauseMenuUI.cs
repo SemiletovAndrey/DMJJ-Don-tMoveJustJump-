@@ -33,6 +33,8 @@ public class PauseMenuUI : MonoBehaviour
         PauseCanvas.gameObject.SetActive(false);
         DieCanvas.gameObject.SetActive(false);
         SetSettingsInStart();
+
+        EventBus.OnHeroDeath += OnHeroDeath;
     }
 
     private void Update()
@@ -41,6 +43,11 @@ public class PauseMenuUI : MonoBehaviour
         {
             ActivePause();
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.OnHeroDeath -= OnHeroDeath;
     }
 
     public void ExitButton()
@@ -91,5 +98,10 @@ public class PauseMenuUI : MonoBehaviour
     private void ActivePause()
     {
         PauseCanvas.gameObject.SetActive(true);
+    }
+
+    private void OnHeroDeath()
+    {
+        SetActiveRestartCanvas();
     }
 }

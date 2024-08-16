@@ -99,5 +99,6 @@ public class HeroDeath : MonoBehaviour
         Debug.Log("Die");
         _shakingObjectService.ResetPosition();
         StopCoroutine(_coroutineDeath);
+        EventBus.OnHeroDeath?.Invoke();
     }
 }
