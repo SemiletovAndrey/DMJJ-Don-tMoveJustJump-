@@ -949,6 +949,9 @@ MonoBehaviour:
   Distance: 10
   offsetY: 2
   _rotationSpeed: 100
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1090027697
 GameObject:
   m_ObjectHideFlags: 0

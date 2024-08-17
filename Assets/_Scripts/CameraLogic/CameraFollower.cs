@@ -19,6 +19,8 @@ public class CameraFollower : MonoBehaviour
     private IInputService _inputService;
     private SettingsData _settingsData;
 
+    [SerializeField] private LayerMask obstacleMask;
+
     [Inject]
     public void Construct(IInputService inputService, SettingsData settingsData)
     {
@@ -32,12 +34,20 @@ public class CameraFollower : MonoBehaviour
         _settingsData.OnSensitivityChanged += UpdateSensitivity;
     }
 
-
     private void LateUpdate()
     {
         if (_following == null)
             return;
+        TurnCameraHandlerButton();
 
+        Quaternion rotation = Quaternion.Euler(RotationAngleX, _currentRotationAngleY, 0f);
+        Vector3 position = rotation * new Vector3(0, 0, -Distance) + FollowingPointPosition();
+        transform.position = position;
+        transform.rotation = rotation;
+    }
+
+    private void TurnCameraHandlerButton()
+    {
         if (_inputService.IsTurnLeftCameraButton())
         {
             if (_currentRotationAngleY < -360)
@@ -58,12 +68,6 @@ public class CameraFollower : MonoBehaviour
         {
             StartCoroutine(ReturnToInitialPosition());
         }
-
-
-        Quaternion rotation = Quaternion.Euler(RotationAngleX, _currentRotationAngleY, 0f);
-        Vector3 position = rotation * new Vector3(0, 0, -Distance) + FollowingPointPosition();
-        transform.position = position;
-        transform.rotation = rotation;
     }
 
     private void OnDestroy()
@@ -96,7 +100,6 @@ public class CameraFollower : MonoBehaviour
 
         _currentRotationAngleY = _initialRotationAngleY;
     }
-
 
     private Vector3 FollowingPointPosition()
     {

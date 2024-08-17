@@ -19,8 +19,8 @@ public class ChangeColorService
         {
             _propertyBlocks[i] = new MaterialPropertyBlock();
             _renderers[i].GetPropertyBlock(_propertyBlocks[i]);
-            _originalColors[i] = _renderers[i].sharedMaterial.GetColor("_Color");
-            _propertyBlocks[i].SetColor("_Color", _originalColors[i]);
+            _originalColors[i] = _renderers[i].sharedMaterial.GetColor("_BaseColor");
+            _propertyBlocks[i].SetColor("_BaseColor", _originalColors[i]);
         }
     }
 
@@ -29,7 +29,7 @@ public class ChangeColorService
         for (int i = 0; i < _renderers.Length; i++)
         {
             Color newColor = Color.Lerp(_originalColors[i], _targetColor, elapsed + 0.5f);
-            _propertyBlocks[i].SetColor("_Color", newColor);
+            _propertyBlocks[i].SetColor("_BaseColor", newColor);
             _renderers[i].SetPropertyBlock(_propertyBlocks[i]);
         }
     }
@@ -38,7 +38,7 @@ public class ChangeColorService
     {
         for (int i = 0; i < _renderers.Length; i++)
         {
-            _propertyBlocks[i].SetColor("_Color", _originalColors[i]);
+            _propertyBlocks[i].SetColor("_BaseColor", _originalColors[i]);
             _renderers[i].SetPropertyBlock(_propertyBlocks[i]);
         }
     }
