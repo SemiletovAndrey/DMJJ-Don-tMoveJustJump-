@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Door
-  m_Shader: {fileID: -6465566751694194690, guid: 636b2c69de2594e4a8ca96a3d1127f13, type: 3}
+  m_Name: GradientMaterialURP
+  m_Shader: {fileID: -6465566751694194690, guid: 10d0353523848b8449e80dc5bec824ea, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -104,7 +104,6 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SeeThroughDistance: 7
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -114,12 +113,14 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.20943397, g: 0.46125868, b: 1, a: 1}
-    - _Color: {r: 0.20943397, g: 0.46125868, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FirstColor: {r: 0.47221604, g: 0.98490566, b: 0.45900315, a: 0}
+    - _SecondColor: {r: 1, g: 0.19433957, b: 0.19433957, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7650325929458474579
+--- !u!114 &7149490263919544319
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
