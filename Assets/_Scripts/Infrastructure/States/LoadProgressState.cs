@@ -4,18 +4,41 @@ using UnityEngine;
 
 public class LoadProgressState : IState
 {
-    public LoadProgressState()
+    private readonly IGameStateMachine _gameStateMachine;
+    private readonly IPersistantProgressService _progressService;
+    private readonly ISaveProgressService _saveLoadService;
+
+    public LoadProgressState(IGameStateMachine gameStateMachine, IPersistantProgressService progressService, ISaveProgressService saveLoadService)
     {
-        
+        _gameStateMachine = gameStateMachine;
+        _progressService = progressService;
+        _saveLoadService = saveLoadService;
     }
 
     public void Enter()
     {
-        Debug.Log("Enter LoadProgress State");
+        LoadProgressOrInitNew();
+        _gameStateMachine.Enter<LoadLevelState, string>(_progressService.Progress.WorldData.PositionOnLevel.Level);
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
     }
+
+    private void LoadProgressOrInitNew()
+    {
+        //_progressService.Progress = _saveLoadService.LoadProgress() ?? NewProgress();
+    }
+
+    //private PlayerProgress NewProgress()
+    //{
+    //    var progress = new PlayerProgress("LevelTest");
+
+    //    progress.HeroState.MaxHP = 50;
+    //    progress.HeroState.ResetHP();
+    //    progress.HeroStats.Damage = 1;
+    //    progress.HeroStats.DamageRadius = 0.5f;
+
+    //    return progress;
+    //}
 }

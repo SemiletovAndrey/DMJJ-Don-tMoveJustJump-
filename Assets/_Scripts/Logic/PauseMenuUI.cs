@@ -29,7 +29,6 @@ public class PauseMenuUI : MonoBehaviour
 
     private void Start()
     {
-        _settingsData = _saveSettingsService.LoadSettings();
         PauseCanvas.gameObject.SetActive(false);
         DieCanvas.gameObject.SetActive(false);
         SetSettingsInStart();
@@ -81,18 +80,15 @@ public class PauseMenuUI : MonoBehaviour
 
     private void ApplySettings()
     {
-        SettingsData settingsData = GetNewSettingData();
-        _saveSettingsService.SaveSettings(settingsData);
+        GetNewSettingData();
+        _saveSettingsService.SaveSettings(_settingsData);
     }
 
-    private SettingsData GetNewSettingData()
+    private void GetNewSettingData()
     {
-        SettingsData settingsData = new SettingsData();
-        settingsData.MusicVolume = _musicSlider.value;
-        settingsData.SoundVolume = _soundSlider.value;
-        settingsData.Sensitivity = _sensitivitySlider.value;
-        
-        return settingsData;
+        _settingsData.MusicVolume = _musicSlider.value;
+        _settingsData.SoundVolume = _soundSlider.value;
+        _settingsData.Sensitivity = _sensitivitySlider.value;
     }
 
     private void ActivePause()

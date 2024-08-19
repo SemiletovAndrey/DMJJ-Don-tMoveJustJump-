@@ -57,21 +57,18 @@ public class MainMenuUI : MonoBehaviour
 
     private void ApplySettings()
     {
-        SettingsData settingsData = GetNewSettingData();
-        _saveSettingsService.SaveSettings(settingsData);
+        GetSettingData();
+        _saveSettingsService.SaveSettings(_settingsData);
     }
 
-    private SettingsData GetNewSettingData()
+    private void GetSettingData()
     {
-        SettingsData settingsData = new SettingsData();
-        settingsData.MusicVolume = _musicSlider.value;
-        settingsData.SoundVolume = _soundSlider.value;
-        settingsData.Sensitivity = _sensitivitySlider.value;
-        settingsData.LockFPS = _lockFPSToggle.isOn;
-        settingsData.Language = DropdownEnumUtility.GetSelectedEnumValue<LanguageEnum>(_languageDropdown);
-        settingsData.GraphicsSettings = DropdownEnumUtility.GetSelectedEnumValue<GraphicsSettingsEnum>(_graphicQualityDropdown);
-
-        return settingsData;
+        _settingsData.MusicVolume = _musicSlider.value;
+        _settingsData.SoundVolume = _soundSlider.value;
+        _settingsData.Sensitivity = _sensitivitySlider.value;
+        _settingsData.LockFPS = _lockFPSToggle.isOn;
+        _settingsData.Language = DropdownEnumUtility.GetSelectedEnumValue<LanguageEnum>(_languageDropdown);
+        _settingsData.GraphicsSettings = DropdownEnumUtility.GetSelectedEnumValue<GraphicsSettingsEnum>(_graphicQualityDropdown);
     }
 
     public void SetSettingsInStart()

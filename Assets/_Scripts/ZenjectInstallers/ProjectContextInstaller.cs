@@ -19,6 +19,7 @@ public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
         Container.Bind<IPersistantProgressService>().To<PersistantProgressService>().AsSingle();
         Container.Bind<ISaveSettingsService>().To<SaveLoadSettingService>().AsSingle();
         Container.Bind<ISaveProgressService>().To<SaveLoadProgressService>().AsSingle();
+
         Container.Bind<SettingsData>().FromMethod(context =>
         {
             ISaveSettingsService saveSettingsService = context.Container.Resolve<ISaveSettingsService>();

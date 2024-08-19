@@ -16,7 +16,7 @@ public class LoadSettingsState : IState
 
     public void Enter()
     {
-        LoadProgressOrInitNew();
+        //LoadProgressOrInitNew();
         _gameStateMachine.Enter<MainMenuState>();
     }
 
