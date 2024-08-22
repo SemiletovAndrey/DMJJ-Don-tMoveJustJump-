@@ -1,3 +1,5 @@
+
+using UnityEngine;
 using Zenject;
 
 public class LoadSettingsState : IState
@@ -16,7 +18,8 @@ public class LoadSettingsState : IState
 
     public void Enter()
     {
-        //LoadProgressOrInitNew();
+        Debug.Log("LoadSettingState");
+        LoadProgressOrInitNew();
         _gameStateMachine.Enter<MainMenuState>();
     }
 
@@ -27,19 +30,31 @@ public class LoadSettingsState : IState
 
     private void LoadProgressOrInitNew()
     {
-        _settingsData = _saveSettingsService.LoadSettings() ?? NewProgress();
+        SettingsData loadedSettings = _saveSettingsService.LoadSettings();
+        if (loadedSettings != null)
+        {
+            _settingsData.Language = loadedSettings.Language;
+            _settingsData.MusicVolume = loadedSettings.MusicVolume;
+            _settingsData.SoundVolume = loadedSettings.SoundVolume;
+            _settingsData.Sensitivity = loadedSettings.Sensitivity;
+            _settingsData.GraphicsSettings = loadedSettings.GraphicsSettings;
+        }
+        else
+        {
+            NewSettings();
+        }
     }
 
-    private SettingsData NewProgress()
+    private SettingsData NewSettings()
     {
-        SettingsData settings = new SettingsData();
-        settings.Language = LanguageEnum.English;
-        settings.MusicVolume = 0.5f;
-        settings.SoundVolume = 0.5f;
-        settings.Sensitivity = 100f;
-        settings.GraphicsSettings = GraphicsSettingsEnum.Low;
-        _saveSettingsService.SaveSettings(settings);
-        return settings;
+        Debug.Log("New Settings");
+        _settingsData.Language = LanguageEnum.English;
+        _settingsData.MusicVolume = 0.5f;
+        _settingsData.SoundVolume = 0.5f;
+        _settingsData.Sensitivity = 100f;
+        _settingsData.GraphicsSettings = GraphicsSettingsEnum.Low;
+        _saveSettingsService.SaveSettings(_settingsData);
+        return _settingsData;
 
     }
 }

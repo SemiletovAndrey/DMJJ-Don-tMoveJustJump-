@@ -11,19 +11,21 @@ public class MainMenuState : IState
     private readonly IGameStateMachine _gameStateMachine;
     private MainMenuUI _mainMenuUI;
     private readonly LoadingCurtain _curtain;
-
+    private SettingsData _settingsData;
 
     [Inject]
-    public MainMenuState(IGameStateMachine gameStateMachine, LoadingCurtain curtain)
+    public MainMenuState(IGameStateMachine gameStateMachine, LoadingCurtain curtain, SettingsData settingsData)
     {
         _gameStateMachine = gameStateMachine;
         _curtain = curtain;
+        _settingsData = settingsData;
     }
 
     public void Enter()
     {
         _curtain.Hide();
         _mainMenuUI = GameObject.FindObjectOfType<MainMenuUI>();
+        _mainMenuUI.SetSettingsInStart();
         OnLoaded();
     }
 
@@ -41,7 +43,7 @@ public class MainMenuState : IState
 
     private void StartGame()
     {
-        _gameStateMachine.Enter<LoadLevelState, string>(LevelTestName);
+        _gameStateMachine.Enter<LoadProgressState>();
     }
 
     private void OpenSettings()

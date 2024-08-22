@@ -19,7 +19,8 @@ public class EntityFactory : IEntityFactory
     public GameObject CreatePlayer(Vector3 position)
     {
         GameObject playerPrefab = InstantiateRegistered(AssetAddress.HeroPath, position);
-        return _container.InstantiatePrefab(playerPrefab);
+        RegisterProgressWatchers(playerPrefab);
+        return playerPrefab;
     }
 
     public GameObject CreateHud()
@@ -34,7 +35,6 @@ public class EntityFactory : IEntityFactory
         {
             hudPrefab = InstantiateRegistered(AssetAddress.HudMobilePath);
         }
-
         return _container.InstantiatePrefab(hudPrefab);
     }
 
@@ -47,8 +47,8 @@ public class EntityFactory : IEntityFactory
     private GameObject InstantiateRegistered(string path, Vector3 position)
     {
         GameObject gameObject = _assetProvider.Instantiate(path, position);
-        RegisterProgressWatchers(gameObject);
-        return gameObject;
+        GameObject Player = _container.InstantiatePrefab(gameObject);
+        return Player;
     }
     private GameObject InstantiateRegistered(string path)
     {
@@ -62,6 +62,8 @@ public class EntityFactory : IEntityFactory
         foreach (ISavedProgressReader reader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
         {
             Register(reader);
+            Debug.Log("Register");
+
         }
     }
 
@@ -70,9 +72,8 @@ public class EntityFactory : IEntityFactory
         if (progressReader is ISavedProgress progressWriter)
         {
             ProgressWriter.Add(progressWriter);
+            Debug.Log("Register Writer");
         }
-
         ProgressReader.Add(progressReader);
     }
-
 }

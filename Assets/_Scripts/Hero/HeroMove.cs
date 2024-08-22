@@ -1,7 +1,9 @@
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
-public class HeroMove : MonoBehaviour
+public class HeroMove : MonoBehaviour, ISavedProgress
 {
     [SerializeField] private Rigidbody RbPlyer;
 
@@ -30,6 +32,34 @@ public class HeroMove : MonoBehaviour
     private void Update()
     {
         MoveHandler();
+    }
+
+    public void UpdateProgress(PlayerProgress progress)
+    {
+        progress.WorldData.PositionOnLevel.Level = CurrentLevel();
+        progress.WorldData.PositionOnLevel.Position = this.transform.position.AsVectorSeril();
+        Debug.Log($"Current Level {CurrentLevel()}");
+        Debug.Log($"Update progress X: {transform.position.x}; Y: {transform.position.y}; Z: {transform.position.z}");
+    }
+
+    public void LoadProgress(PlayerProgress progress)
+    {
+        if (CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
+        {
+            Vector3Serial savedPosition = progress.WorldData.PositionOnLevel.Position;
+            if (savedPosition != null)
+            {
+                Warp(savedPosition);
+            }
+        }
+    }
+
+    private void Warp(Vector3Serial to)
+    {
+        RbPlyer.isKinematic = true;
+        Debug.Log("Warp");
+        transform.position = to.AsUnityVector().AddY(RbPlyer.transform.localScale.y);
+        RbPlyer.isKinematic = false;
     }
 
 
@@ -70,5 +100,11 @@ public class HeroMove : MonoBehaviour
             }
         }
     }
+
+    private static string CurrentLevel()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
 
 }

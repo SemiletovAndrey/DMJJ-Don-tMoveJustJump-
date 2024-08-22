@@ -6,8 +6,11 @@ public class SaveLoadSettingService : ISaveSettingsService
 {
     private const string SettingsKey = "GameSettings";
 
-    public SettingsData LoadSettings() =>
-        PlayerPrefs.GetString(SettingsKey)?.ToDeserialized<SettingsData>();
+    public SettingsData LoadSettings()
+    {
+        Debug.Log("Loading Settings");
+        return PlayerPrefs.GetString(SettingsKey)?.ToDeserialized<SettingsData>();
+    }
 
     public void SaveSettings(SettingsData settings)
     {

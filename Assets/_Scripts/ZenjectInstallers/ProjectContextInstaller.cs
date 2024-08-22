@@ -19,20 +19,40 @@ public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
         Container.Bind<IPersistantProgressService>().To<PersistantProgressService>().AsSingle();
         Container.Bind<ISaveSettingsService>().To<SaveLoadSettingService>().AsSingle();
         Container.Bind<ISaveProgressService>().To<SaveLoadProgressService>().AsSingle();
+        Container.Bind<SettingsData>().AsSingle();
+        
 
+    }
+
+    private void BindingSettingsData()
+    {
         Container.Bind<SettingsData>().FromMethod(context =>
         {
             ISaveSettingsService saveSettingsService = context.Container.Resolve<ISaveSettingsService>();
             SettingsData loadedData = saveSettingsService.LoadSettings();
-
-            return new SettingsData
+            if (loadedData == null)
             {
-                Language = loadedData.Language,
-                SoundVolume = loadedData.SoundVolume,
-                MusicVolume = loadedData.MusicVolume,
-                Sensitivity = loadedData.Sensitivity,
-                GraphicsSettings = loadedData.GraphicsSettings
-            };
+                return new SettingsData
+                {
+                    Language = LanguageEnum.English,
+                    MusicVolume = 0.5f,
+                    SoundVolume = 0.5f,
+                    Sensitivity = 100f,
+                    GraphicsSettings = GraphicsSettingsEnum.Low,
+                };
+            }
+            else
+            {
+                return new SettingsData
+                {
+                    Language = loadedData.Language,
+                    SoundVolume = loadedData.SoundVolume,
+                    MusicVolume = loadedData.MusicVolume,
+                    Sensitivity = loadedData.Sensitivity,
+                    GraphicsSettings = loadedData.GraphicsSettings
+                };
+            }
+
         }).AsSingle();
     }
 

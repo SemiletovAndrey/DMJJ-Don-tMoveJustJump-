@@ -31,7 +31,6 @@ public class MainMenuUI : MonoBehaviour
     private void Start()
     {
         SettingsCanvas.gameObject.SetActive(false);
-        SetSettingsInStart();
     }
 
     public void StartGameButton()

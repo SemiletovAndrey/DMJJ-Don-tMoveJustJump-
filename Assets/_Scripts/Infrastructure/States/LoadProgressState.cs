@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class LoadProgressState : IState
 {
+
     private readonly IGameStateMachine _gameStateMachine;
     private readonly IPersistantProgressService _progressService;
-    private readonly ISaveProgressService _saveLoadService;
+    private readonly ISaveProgressService _saveProgressService;
 
     public LoadProgressState(IGameStateMachine gameStateMachine, IPersistantProgressService progressService, ISaveProgressService saveLoadService)
     {
         _gameStateMachine = gameStateMachine;
         _progressService = progressService;
-        _saveLoadService = saveLoadService;
+        _saveProgressService = saveLoadService;
     }
 
     public void Enter()
@@ -27,18 +28,21 @@ public class LoadProgressState : IState
 
     private void LoadProgressOrInitNew()
     {
-        //_progressService.Progress = _saveLoadService.LoadProgress() ?? NewProgress();
+        PlayerProgress progress = _saveProgressService.LoadProgress();
+        if(progress != null)
+        {
+            _progressService.Progress.WorldData.PositionOnLevel.Level = progress.WorldData.PositionOnLevel.Level;
+            _progressService.Progress.WorldData.PositionOnLevel.Position = progress.WorldData.PositionOnLevel.Position;
+        }
+        else
+        {
+            NewProgress();
+        }
     }
 
-    //private PlayerProgress NewProgress()
-    //{
-    //    var progress = new PlayerProgress("LevelTest");
-
-    //    progress.HeroState.MaxHP = 50;
-    //    progress.HeroState.ResetHP();
-    //    progress.HeroStats.Damage = 1;
-    //    progress.HeroStats.DamageRadius = 0.5f;
-
-    //    return progress;
-    //}
+    private PlayerProgress NewProgress()
+    {
+        _progressService.Progress.WorldData.PositionOnLevel.Level = "TrainRoom";
+        return _progressService.Progress;
+    }
 }
