@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824ea39ff7d54f54babd865b7b161db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RbPlyer: {fileID: 3136502347927070214}
+  RbPlayer: {fileID: 3136502347927070214}
   _isJumped: 0
   _isTriggered: 0
 --- !u!114 &2096554783817548101

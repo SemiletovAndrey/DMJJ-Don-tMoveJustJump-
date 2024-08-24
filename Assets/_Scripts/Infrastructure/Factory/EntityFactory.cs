@@ -18,9 +18,10 @@ public class EntityFactory : IEntityFactory
 
     public GameObject CreatePlayer(Vector3 position)
     {
-        GameObject playerPrefab = InstantiateRegistered(AssetAddress.HeroPath, position);
-        RegisterProgressWatchers(playerPrefab);
-        return playerPrefab;
+        GameObject player = InstantiateRegistered(AssetAddress.HeroPath, position);
+        RegisterProgressWatchers(player);
+        player.transform.position = position;
+        return player;
     }
 
     public GameObject CreateHud()

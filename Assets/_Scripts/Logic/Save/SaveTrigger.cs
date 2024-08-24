@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -18,7 +16,6 @@ public class SaveTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _saveProgressService.SaveProgress();
-        Debug.Log($"On Save trigger{_persistantProgressService.Progress.WorldData.PositionOnLevel.Position.Z}");
         gameObject.SetActive(false);
     }
 }

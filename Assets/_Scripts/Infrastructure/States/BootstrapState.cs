@@ -1,5 +1,3 @@
-using System;
-using UnityEngine;
 using Zenject;
 
 public class BootstrapState : IState
@@ -9,16 +7,19 @@ public class BootstrapState : IState
 
     private readonly IGameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
+    private readonly IStaticDataService _staticDataService;
 
     [Inject]
-    public BootstrapState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader)
+    public BootstrapState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, IStaticDataService staticDataService)
     {
         this._gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
+        _staticDataService = staticDataService;
     }
 
     public void Enter()
     {
+        _staticDataService.Load();
         _sceneLoader.Load(Initial, EnterLevelLoad);
     }
 

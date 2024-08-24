@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -17,6 +15,7 @@ public class GameBootstraper : MonoBehaviour
     private void Start()
     {
         _gameStateMachine.Enter<BootstrapState>();
+        Application.targetFrameRate = 60;
         DontDestroyOnLoad(this);
     }
 }

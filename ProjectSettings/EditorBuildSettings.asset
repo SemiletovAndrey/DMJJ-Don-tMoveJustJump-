@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/_Scenes/StartScene/MainMenuScene.unity
     guid: ebc6f612cbd6e464b81d5229032433b9
   - enabled: 1
-    path: Assets/_Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
     path: Assets/_Scenes/TrainLevel/TrainRoom.unity
     guid: e673319783c6c0648869f8f19cad81b9
   m_configObjects: {}

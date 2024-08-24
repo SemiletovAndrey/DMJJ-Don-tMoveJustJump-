@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class LoadLevelState : IPayloadState<string>
@@ -13,15 +11,17 @@ public class LoadLevelState : IPayloadState<string>
     private readonly LoadingCurtain _curtain;
     private IEntityFactory _entityFactory;
     private IPersistantProgressService _progressService;
+    private IStaticDataService _staticDataService;
 
     [Inject]
-    public LoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IEntityFactory entityFactory, IPersistantProgressService progressService)
+    public LoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService)
     {
         this._gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
         _curtain = curtain;
         _entityFactory = entityFactory;
         _progressService = progressService;
+        _staticDataService = staticDataService;
     }
 
 
@@ -39,7 +39,9 @@ public class LoadLevelState : IPayloadState<string>
 
     private void OnLoad()
     {
-        GameObject player = InitPlayer();
+        LevelStaticData levelData = LevelStaticData();
+
+        GameObject player = InitPlayer(levelData);
         InitHud();
         InformProgressReaders();
         CameraFollow(player);
@@ -48,11 +50,17 @@ public class LoadLevelState : IPayloadState<string>
 
     }
 
-    private GameObject InitPlayer()
+    private LevelStaticData LevelStaticData()
     {
-        Vector3 positionPlayer = GameObject.FindWithTag(InitialPointTag).transform.position;
-        GameObject player = _entityFactory.CreatePlayer(positionPlayer);
-        player.transform.position = positionPlayer;
+        string sceneKey = SceneManager.GetActiveScene().name;
+        LevelStaticData levelData = _staticDataService.ForLevel(sceneKey);
+        return levelData;
+    }
+
+    private GameObject InitPlayer(LevelStaticData levelData)
+    {
+        GameObject player = _entityFactory.CreatePlayer(levelData.InitialPlayerPoint);
+        
         return player;
     }
 

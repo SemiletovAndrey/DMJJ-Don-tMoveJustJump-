@@ -1,11 +1,10 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
 public class HeroMove : MonoBehaviour, ISavedProgress
 {
-    [SerializeField] private Rigidbody RbPlyer;
+    [SerializeField] private Rigidbody RbPlayer;
 
     private IInputService _inputService;
     private CharacterSettings _characterSettings;
@@ -14,7 +13,7 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     [SerializeField] private bool _isJumped = false;
     [SerializeField] private bool _isTriggered = false;
 
-
+    private Vector3 _movementVector;
 
     [Inject]
     public void Construct(IInputService inputService, CharacterSettings characterSettings)
@@ -31,15 +30,21 @@ public class HeroMove : MonoBehaviour, ISavedProgress
 
     private void Update()
     {
-        MoveHandler();
+        // ќбрабатываем движение и направление в Update
+        CalculateMovement();
+        HandleJump();
+    }
+
+    private void FixedUpdate()
+    {
+        // ѕримен€ем силы в FixedUpdate дл€ более точного управлени€ физикой
+        ApplyMovement();
     }
 
     public void UpdateProgress(PlayerProgress progress)
     {
         progress.WorldData.PositionOnLevel.Level = CurrentLevel();
         progress.WorldData.PositionOnLevel.Position = this.transform.position.AsVectorSeril();
-        Debug.Log($"Current Level {CurrentLevel()}");
-        Debug.Log($"Update progress X: {transform.position.x}; Y: {transform.position.y}; Z: {transform.position.z}");
     }
 
     public void LoadProgress(PlayerProgress progress)
@@ -56,10 +61,9 @@ public class HeroMove : MonoBehaviour, ISavedProgress
 
     private void Warp(Vector3Serial to)
     {
-        RbPlyer.isKinematic = true;
-        Debug.Log("Warp");
-        transform.position = to.AsUnityVector().AddY(RbPlyer.transform.localScale.y);
-        RbPlyer.isKinematic = false;
+        RbPlayer.isKinematic = true;
+        transform.position = to.AsUnityVector().AddY(RbPlayer.transform.localScale.y);
+        RbPlayer.isKinematic = false;
     }
 
 
@@ -72,31 +76,38 @@ public class HeroMove : MonoBehaviour, ISavedProgress
         }
     }
 
-    private void MoveHandler()
+    private void CalculateMovement()
     {
-        Vector3 movementVector = Vector3.zero;
+        _movementVector = Vector3.zero;
         if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
         {
-            movementVector = _camera.transform.TransformDirection(_inputService.Axis);
-            movementVector.y = 0;
-            movementVector.Normalize();
+            _movementVector = _camera.transform.TransformDirection(_inputService.Axis);
+            _movementVector.y = 0;
+            _movementVector.Normalize();
+        }
+    }
+
+    private void HandleJump()
+    {
+        if (!_isJumped && _inputService.IsJumpButtonUp())
+        {
+            RbPlayer.AddForce(Vector3.up * _characterSettings.JumpForce, ForceMode.Impulse);
+            _isJumped = true;
+            _isTriggered = false;
+        }
+    }
+
+    private void ApplyMovement()
+    {
+        if (_movementVector.sqrMagnitude > Constants.Epsilon)
+        {
             if (!_isJumped)
             {
-                RbPlyer.AddForce(movementVector * _characterSettings.MovementForceOnGround, ForceMode.Force);
+                RbPlayer.AddForce(_movementVector * _characterSettings.MovementForceOnGround, ForceMode.Force);
             }
-            else if (_isJumped)
+            else
             {
-                RbPlyer.AddForce(movementVector * _characterSettings.MovementForceOnAir, ForceMode.Force);
-            }
-
-        }
-        if (!_isJumped)
-        {
-            if (_inputService.IsJumpButtonUp())
-            {
-                RbPlyer.AddForce(Vector3.up * _characterSettings.JumpForce, ForceMode.Impulse);
-                _isJumped = true;
-                _isTriggered = false;
+                RbPlayer.AddForce(_movementVector * _characterSettings.MovementForceOnAir, ForceMode.Force);
             }
         }
     }
