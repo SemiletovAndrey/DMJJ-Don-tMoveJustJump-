@@ -21,6 +21,7 @@ public class EntityFactory : IEntityFactory
         GameObject player = InstantiateRegistered(AssetAddress.HeroPath, position);
         RegisterProgressWatchers(player);
         player.transform.position = position;
+        _container.Bind<GameObject>().WithId("Player").FromInstance(player).AsSingle();
         return player;
     }
 

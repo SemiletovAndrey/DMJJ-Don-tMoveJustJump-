@@ -6,16 +6,16 @@ using Zenject;
 public class HeroDeath : MonoBehaviour
 {
     [SerializeField, Range(1, 100)] private float delayTimeDeath = 3f;
+    [SerializeField] private ShakingObjectService _shakingObjectService;
+    [SerializeField] private Renderer[] _renderers;
+    [SerializeField] private Transform transformShaking;
+
 
     public Action OnDeath;
 
     private Coroutine _coroutineDeath;
     private bool _isLieDown = false;
     private ChangeColorService _changeColorService;
-    [SerializeField] private ShakingObjectService _shakingObjectService;
-    [SerializeField] private Renderer[] _renderers;
-    [SerializeField] private Transform transformShaking;
-
     private CharacterSettings _characterSettings;
 
     [Inject]
@@ -30,6 +30,11 @@ public class HeroDeath : MonoBehaviour
         OnDeath += OnDeathHandler;
         _changeColorService = new ChangeColorService(_renderers, _characterSettings.HeroDeathColor);
         _shakingObjectService = new ShakingObjectService(transformShaking, _characterSettings.MaxShakeAmount, _characterSettings.FrequencyDeath);
+    }
+
+    private void OnEnable()
+    {
+        _isLieDown = false;
     }
 
     private void OnDestroy()
@@ -100,5 +105,16 @@ public class HeroDeath : MonoBehaviour
         _shakingObjectService.ResetPosition();
         StopCoroutine(_coroutineDeath);
         EventBus.OnHeroDeath?.Invoke();
+        Die();
+    }
+
+    public void ResetColor()
+    {
+        _changeColorService.ResetColor();
+    }
+
+    public void Die()
+    {
+        gameObject.SetActive(false);
     }
 }

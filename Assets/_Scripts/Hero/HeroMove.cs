@@ -30,14 +30,12 @@ public class HeroMove : MonoBehaviour, ISavedProgress
 
     private void Update()
     {
-        // ќбрабатываем движение и направление в Update
         CalculateMovement();
         HandleJump();
     }
 
     private void FixedUpdate()
     {
-        // ѕримен€ем силы в FixedUpdate дл€ более точного управлени€ физикой
         ApplyMovement();
     }
 
@@ -57,6 +55,11 @@ public class HeroMove : MonoBehaviour, ISavedProgress
                 Warp(savedPosition);
             }
         }
+    }
+
+    public void RestartRotation()
+    {
+        transform.rotation = Quaternion.Euler(0,0,0);
     }
 
     private void Warp(Vector3Serial to)

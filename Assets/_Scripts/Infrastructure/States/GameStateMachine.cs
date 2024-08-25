@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class GameStateMachine : IGameStateMachine
+public class GameStateMachine : IGameStateMachine, IInitializable
 {
     private readonly Dictionary<Type, IExitableState> _states = new Dictionary<Type, IExitableState>();
     private IExitableState _activeState;
@@ -23,6 +23,11 @@ public class GameStateMachine : IGameStateMachine
         _states[typeof(LoadLevelState)] = _stateFactory.CreateLoadLevelState();
         _states[typeof(MainMenuState)] = _stateFactory.CreateMainMenuState();
         _states[typeof(GameLoopState)] = _stateFactory.CreateGameLoopState();
+    }
+
+    public void Initialize()
+    {
+        InitializeStates();
     }
 
     public void Enter<TState>() where TState : class, IState
@@ -52,4 +57,6 @@ public class GameStateMachine : IGameStateMachine
     {
         return _states[typeof(TState)] as TState;
     }
+
+    
 }

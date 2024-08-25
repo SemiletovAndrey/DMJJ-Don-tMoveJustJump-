@@ -22,43 +22,11 @@ public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
         Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
     }
 
-    private void BindingSettingsData()
-    {
-        Container.Bind<SettingsData>().FromMethod(context =>
-        {
-            ISaveSettingsService saveSettingsService = context.Container.Resolve<ISaveSettingsService>();
-            SettingsData loadedData = saveSettingsService.LoadSettings();
-            if (loadedData == null)
-            {
-                return new SettingsData
-                {
-                    Language = LanguageEnum.English,
-                    MusicVolume = 0.5f,
-                    SoundVolume = 0.5f,
-                    Sensitivity = 100f,
-                    GraphicsSettings = GraphicsSettingsEnum.Low,
-                };
-            }
-            else
-            {
-                return new SettingsData
-                {
-                    Language = loadedData.Language,
-                    SoundVolume = loadedData.SoundVolume,
-                    MusicVolume = loadedData.MusicVolume,
-                    Sensitivity = loadedData.Sensitivity,
-                    GraphicsSettings = loadedData.GraphicsSettings
-                };
-            }
-
-        }).AsSingle();
-    }
-
     private void GameStateMachineBindings()
     {
         Container.Bind<SceneLoader>().FromNew().AsSingle().WithArguments(this).NonLazy();
         Container.Bind<IStateFactory>().To<StateFactory>().AsSingle().NonLazy();
-        Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle().OnInstantiated<GameStateMachine>((context, machine) => machine.InitializeStates());
+        Container.BindInterfacesAndSelfTo<GameStateMachine>().AsSingle();
         Container.Bind<LoadingCurtain>().FromComponentInNewPrefab(loadingCurtain).AsSingle();
     }
 
