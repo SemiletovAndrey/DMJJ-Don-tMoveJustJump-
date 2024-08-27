@@ -1504,6 +1504,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 24.99988
       objectReference: {fileID: 0}
+    - target: {fileID: 1991637635416953234, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991637635416953234, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1883976908}
+    - target: {fileID: 1991637635416953234, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HardRestart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991637635416953234, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RestartUI, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2175515008907088580, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1690,7 +1706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7180935074532005579, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -22.913391
+      value: -22.91333
       objectReference: {fileID: 0}
     - target: {fileID: 7281325606666122471, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1723,6 +1739,22 @@ PrefabInstance:
     - target: {fileID: 8415506844551315045, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9128569690137654209, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9128569690137654209, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1883976908}
+    - target: {fileID: 9128569690137654209, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 9128569690137654209, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RestartUI, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

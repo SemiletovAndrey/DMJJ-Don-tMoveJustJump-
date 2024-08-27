@@ -28,6 +28,11 @@ public class HeroMove : MonoBehaviour, ISavedProgress
         _camera = Camera.main;
     }
 
+    private void OnEnable()
+    {
+        _camera = Camera.main;
+    }
+
     private void Update()
     {
         CalculateMovement();
@@ -115,7 +120,7 @@ public class HeroMove : MonoBehaviour, ISavedProgress
         }
     }
 
-    private static string CurrentLevel()
+    public static string CurrentLevel()
     {
         return SceneManager.GetActiveScene().name;
     }

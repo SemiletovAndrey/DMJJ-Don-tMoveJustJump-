@@ -9,11 +9,12 @@ public class PauseMenuUI : MonoBehaviour
     private ISaveSettingsService _saveSettingsService;
     private IInputService _inputService;
     private SettingsData _settingsData;
+    private bool _isActivePause = false;
 
     [Inject(Id = "MusicSlider")] private Slider _musicSlider;
     [Inject(Id = "SoundSlider")] private Slider _soundSlider;
     [Inject(Id = "SensitivitySlider")] private Slider _sensitivitySlider;
-    
+
 
     [Inject]
     public void Construct(ISaveSettingsService saveSettingsService, IInputService inputService, SettingsData settingsData)
@@ -34,13 +35,22 @@ public class PauseMenuUI : MonoBehaviour
     {
         if (_inputService.IsMenuPause())
         {
-            ActivePause();
+            if (!_isActivePause)
+            {
+                ActivatePause();
+                _isActivePause = true;
+            }
+            else
+            {
+                DeactivatePause();
+                _isActivePause = false;
+            }
+
         }
     }
 
     public void ExitButton()
     {
-        Debug.Log("Exit");
         Application.Quit();
     }
 
@@ -75,8 +85,13 @@ public class PauseMenuUI : MonoBehaviour
         _settingsData.Sensitivity = _sensitivitySlider.value;
     }
 
-    private void ActivePause()
+    private void ActivatePause()
     {
         PauseCanvas.gameObject.SetActive(true);
+    }
+
+    private void DeactivatePause()
+    {
+        PauseCanvas.gameObject.SetActive(false);
     }
 }

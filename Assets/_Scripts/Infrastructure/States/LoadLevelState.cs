@@ -4,8 +4,6 @@ using Zenject;
 
 public class LoadLevelState : IPayloadState<string>
 {
-    private const string InitialPointTag = "InitialPoint";
-
     private readonly IGameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _curtain;

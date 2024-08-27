@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +7,7 @@ public class RestartUI : MonoBehaviour
 
     [Inject] private DiContainer _container;
     [Inject] private IPersistantProgressService _persistantProgress;
+    [Inject] private IGameStateMachine _gameStateMachine;
     private GameObject _player;
     private RestartService _restartService;
 
@@ -30,8 +28,19 @@ public class RestartUI : MonoBehaviour
         {
             _player = _container.ResolveId<GameObject>("Player");
         }
-        _restartService = new RestartService(_player,_persistantProgress);
+        _restartService = new RestartService(_player,_persistantProgress, _gameStateMachine);
         _restartService.Restart();
+        SetActiveOffRestartCanvas();
+    }
+
+    public void HardRestart()
+    {
+        if (_player == null)
+        {
+            _player = _container.ResolveId<GameObject>("Player");
+        }
+        _restartService = new RestartService(_player, _persistantProgress, _gameStateMachine);
+        _restartService.HardRestart();
         SetActiveOffRestartCanvas();
     }
 
@@ -49,4 +58,6 @@ public class RestartUI : MonoBehaviour
     {
         SetActiveOnRestartCanvas();
     }
+
+
 }
