@@ -46,13 +46,13 @@ public class HeroMove : MonoBehaviour, ISavedProgress
 
     public void UpdateProgress(PlayerProgress progress)
     {
-        progress.WorldData.PositionOnLevel.Level = CurrentLevel();
+        progress.WorldData.PositionOnLevel.Level = SceneStaticService.CurrentLevel();
         progress.WorldData.PositionOnLevel.Position = this.transform.position.AsVectorSeril();
     }
 
     public void LoadProgress(PlayerProgress progress)
     {
-        if (CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
+        if (SceneStaticService.CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
         {
             Vector3Serial savedPosition = progress.WorldData.PositionOnLevel.Position;
             if (savedPosition != null)
@@ -119,11 +119,4 @@ public class HeroMove : MonoBehaviour, ISavedProgress
             }
         }
     }
-
-    public static string CurrentLevel()
-    {
-        return SceneManager.GetActiveScene().name;
-    }
-
-
 }

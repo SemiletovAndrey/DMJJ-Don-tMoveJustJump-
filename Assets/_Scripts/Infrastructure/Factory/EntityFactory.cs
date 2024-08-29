@@ -18,8 +18,7 @@ public class EntityFactory : IEntityFactory
 
     public GameObject CreatePlayer(Vector3 position)
     {
-        GameObject player = InstantiateRegistered(AssetAddress.HeroPath, position);
-        RegisterProgressWatchers(player);
+        GameObject player = InstantiateRegistered(AssetAddress.HeroPath, position, true);
         player.transform.position = position;
         _container.Bind<GameObject>().WithId("Player").FromInstance(player).AsSingle();
         return player;
@@ -40,17 +39,28 @@ public class EntityFactory : IEntityFactory
         return _container.InstantiatePrefab(hudPrefab);
     }
 
+    public GameObject CreateSaveTrigger(Vector3 position)
+    {
+        GameObject trigger = InstantiateRegistered(AssetAddress.SaveTriggerPath, position);
+        trigger.transform.position = position;
+        return _container.InstantiatePrefab(trigger);
+    }
+
     public void CleanUp()
     {
         ProgressReader.Clear();
         ProgressWriter.Clear();
     }
 
-    private GameObject InstantiateRegistered(string path, Vector3 position)
+    private GameObject InstantiateRegistered(string path, Vector3 position, bool pushInContainer = false)
     {
         GameObject gameObject = _assetProvider.Instantiate(path, position);
-        GameObject Player = _container.InstantiatePrefab(gameObject);
-        return Player;
+        if (pushInContainer)
+        {
+            gameObject = _container.InstantiatePrefab(gameObject);
+        }
+        RegisterProgressWatchers(gameObject);
+        return gameObject;
     }
     private GameObject InstantiateRegistered(string path)
     {

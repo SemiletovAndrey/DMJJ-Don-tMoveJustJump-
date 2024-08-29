@@ -1,6 +1,8 @@
+using UnityEngine.SceneManagement;
+
 public class LoadProgressState : IState
 {
-
+    private const string LevelInitNameConst = "TrainRoom";
     private readonly IGameStateMachine _gameStateMachine;
     private readonly IPersistantProgressService _progressService;
     private readonly ISaveProgressService _saveProgressService;
@@ -38,7 +40,7 @@ public class LoadProgressState : IState
 
     private PlayerProgress NewProgress()
     {
-        _progressService.Progress.WorldData.PositionOnLevel.Level = "TrainRoom";
+        _progressService.Progress.WorldData.PositionOnLevel.Level = LevelInitNameConst;
         return _progressService.Progress;
     }
 }

@@ -4,18 +4,27 @@ using Zenject;
 public class SaveTrigger : MonoBehaviour
 {
     private ISaveProgressService _saveProgressService;
-    private IPersistantProgressService _persistantProgressService;
+    private IStaticDataService _staticDataService;
 
     [Inject]
-    public void Construct(ISaveProgressService saveProgressService, IPersistantProgressService persistantProgressService)
+    public void Construct(ISaveProgressService saveProgressService, IStaticDataService staticDataService)
     {
         _saveProgressService = saveProgressService;
-        _persistantProgressService = persistantProgressService;
+        _staticDataService = staticDataService;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         _saveProgressService.SaveProgress();
-        gameObject.SetActive(false);
+        LevelStaticData levelData = _staticDataService.GetLevelStaticData();
+        if (levelData.CurrentCheckpointIndex < levelData.Checkpoints.Count - 1)
+        {
+            levelData.CurrentCheckpointIndex++;
+            transform.position = levelData.Checkpoints[levelData.CurrentCheckpointIndex];
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -20,7 +20,7 @@ public class HardRestartStates : IState
     }
     public void Enter()
     {
-        _sceneLoader.LoadForRestart(HeroMove.CurrentLevel(), OnLoad);
+        _sceneLoader.LoadForRestart(SceneStaticService.CurrentLevel(), OnLoad);
     }
 
     public void Exit()

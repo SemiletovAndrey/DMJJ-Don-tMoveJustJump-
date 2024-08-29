@@ -21,7 +21,6 @@ public class SaveLoadProgressService : ISaveProgressService
         foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriter)
         {
             progressWriter.UpdateProgress(_persistantProgress.Progress);
-            Debug.Log($"SaveLoadService{_persistantProgress.Progress.WorldData.PositionOnLevel.Position.Y}");
         }
 
         PlayerPrefs.SetString(ProgressKey, _persistantProgress.Progress.ToJson());

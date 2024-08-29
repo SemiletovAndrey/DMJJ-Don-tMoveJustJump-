@@ -10,7 +10,8 @@ public class CharacterSettings : ScriptableObject
 
     [Header("Death parameter")]
     public Color HeroDeathColor;
+    [Range(1, 100)] public float DelayTimeDeath;
     public float FrequencyDeath;
     public float MaxShakeAmount;
-
+    public GameObject DieParticleEffects;
 }

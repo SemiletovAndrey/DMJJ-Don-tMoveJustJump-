@@ -25,7 +25,7 @@ public class SceneLoader
 
     private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
     {
-        if (SceneManager.GetActiveScene().name == nextScene)
+        if (SceneStaticService.CurrentLevel() == nextScene)
         {
             onLoaded?.Invoke();
             yield break;

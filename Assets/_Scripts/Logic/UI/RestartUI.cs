@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -46,7 +47,7 @@ public class RestartUI : MonoBehaviour
 
     private void SetActiveOnRestartCanvas()
     {
-        DieCanvas.gameObject.SetActive(true);
+        StartCoroutine(SetActiveRestartCoroutine());
     }
 
     private void SetActiveOffRestartCanvas()
@@ -59,5 +60,10 @@ public class RestartUI : MonoBehaviour
         SetActiveOnRestartCanvas();
     }
 
+    private IEnumerator SetActiveRestartCoroutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+        DieCanvas.gameObject.SetActive(true);
+    }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -37,10 +38,11 @@ public class LoadLevelState : IPayloadState<string>
 
     private void OnLoad()
     {
-        LevelStaticData levelData = LevelStaticData();
+        LevelStaticData levelData = _staticDataService.GetLevelStaticData();
 
         GameObject player = InitPlayer(levelData);
         InitHud();
+        InitSaveTrigger(levelData);
         InformProgressReaders();
         CameraFollow(player);
         _gameStateMachine.Enter<GameLoopState>();
@@ -48,23 +50,31 @@ public class LoadLevelState : IPayloadState<string>
 
     }
 
-    private LevelStaticData LevelStaticData()
+    private void InitSaveTrigger(LevelStaticData levelStaticData)
     {
-        string sceneKey = SceneManager.GetActiveScene().name;
-        LevelStaticData levelData = _staticDataService.ForLevel(sceneKey);
-        return levelData;
+        int positionIndex = levelStaticData.CurrentCheckpointIndex;
+        if (positionIndex == 0)
+        {
+            _entityFactory.CreateSaveTrigger(levelStaticData.Checkpoints[positionIndex]);
+
+        }
+        else if (positionIndex < levelStaticData.CurrentCheckpointIndex - 1)
+        {
+            positionIndex++;
+            _entityFactory.CreateSaveTrigger(levelStaticData.Checkpoints[levelStaticData.CurrentCheckpointIndex]);
+        }
     }
 
     private GameObject InitPlayer(LevelStaticData levelData)
     {
         GameObject player = _entityFactory.CreatePlayer(levelData.InitialPlayerPoint);
-        
+
         return player;
     }
 
     private void InitHud()
     {
-        GameObject hud = _entityFactory.CreateHud();
+        _entityFactory.CreateHud();
     }
 
     private void InformProgressReaders()
