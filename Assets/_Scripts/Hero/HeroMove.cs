@@ -54,6 +54,7 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     {
         if (SceneStaticService.CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
         {
+            Debug.Log("Load prodress hero move");
             Vector3Serial savedPosition = progress.WorldData.PositionOnLevel.Position;
             if (savedPosition != null)
             {

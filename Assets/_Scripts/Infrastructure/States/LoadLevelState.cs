@@ -46,22 +46,16 @@ public class LoadLevelState : IPayloadState<string>
         InformProgressReaders();
         CameraFollow(player);
         _gameStateMachine.Enter<GameLoopState>();
-        Debug.Log("OnLoad");
-
     }
 
     private void InitSaveTrigger(LevelStaticData levelStaticData)
     {
-        int positionIndex = levelStaticData.CurrentCheckpointIndex;
-        if (positionIndex == 0)
+        int positionIndex = _progressService.Progress.WorldData.PositionOnLevel.CurrentCheckpointIndex;
+        Debug.Log($"Position index {positionIndex}");
+        Debug.Log($"Checkpoints count {levelStaticData.Checkpoints.Count}");
+        if (positionIndex < levelStaticData.Checkpoints.Count)
         {
             _entityFactory.CreateSaveTrigger(levelStaticData.Checkpoints[positionIndex]);
-
-        }
-        else if (positionIndex < levelStaticData.CurrentCheckpointIndex - 1)
-        {
-            positionIndex++;
-            _entityFactory.CreateSaveTrigger(levelStaticData.Checkpoints[levelStaticData.CurrentCheckpointIndex]);
         }
     }
 
@@ -82,7 +76,6 @@ public class LoadLevelState : IPayloadState<string>
         foreach (ISavedProgressReader reader in _entityFactory.ProgressReader)
         {
             reader.LoadProgress(_progressService.Progress);
-            Debug.Log("Read");
         }
     }
     private void CameraFollow(GameObject hero)

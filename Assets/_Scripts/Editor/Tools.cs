@@ -10,9 +10,10 @@ public class Tools
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-        LevelStaticData scriptableObject = Resources.Load<LevelStaticData>($"StaticData/Levels/{SceneManager.GetActiveScene().name}");
-        scriptableObject.CurrentCheckpointIndex = 0;
-        EditorUtility.SetDirty(scriptableObject);
-        AssetDatabase.SaveAssets();
+        //LevelStaticData scriptableObject = Resources.Load<LevelStaticData>($"StaticData/Levels/{SceneManager.GetActiveScene().name}");
+        //scriptableObject.CurrentCheckpointIndex = 0;
+        //EditorUtility.SetDirty(scriptableObject);
+        //AssetDatabase.SaveAssets();
+        Debug.Log("Clear prefs");
     }
 }

@@ -17,8 +17,6 @@ public class CameraFollower : MonoBehaviour
     private IInputService _inputService;
     private SettingsData _settingsData;
 
-    [SerializeField] private LayerMask obstacleMask;
-
     [Inject]
     public void Construct(IInputService inputService, SettingsData settingsData)
     {

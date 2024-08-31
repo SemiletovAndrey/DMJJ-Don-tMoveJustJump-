@@ -9,11 +9,15 @@ public class RestartUI : MonoBehaviour
     [Inject] private DiContainer _container;
     [Inject] private IPersistantProgressService _persistantProgress;
     [Inject] private IGameStateMachine _gameStateMachine;
+    [Inject(Id = "RestartContainer")]private RectTransform _restartRectContainer;
     private GameObject _player;
     private RestartService _restartService;
+    private UIWindowAnimator _windowAnimator;
+
 
     private void Start()
     {
+        _windowAnimator = new UIWindowAnimator(_restartRectContainer);  
         DieCanvas.gameObject.SetActive(false);
         EventBus.OnHeroDeath += OnHeroDeath;
     }
@@ -64,6 +68,7 @@ public class RestartUI : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         DieCanvas.gameObject.SetActive(true);
+        _windowAnimator.AnimateExpandWindow(Vector3.one);
     }
 
 }

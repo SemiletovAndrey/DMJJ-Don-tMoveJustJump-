@@ -13,8 +13,9 @@ public class SaveLoadProgressService : ISaveProgressService
         _persistantProgress = persistantProgress;
     }
 
-    public PlayerProgress LoadProgress() =>
+    public PlayerProgress LoadProgress()=>
         PlayerPrefs.GetString(ProgressKey)?.ToDeserialized<PlayerProgress>();
+    
 
     public void SaveProgress()
     {
