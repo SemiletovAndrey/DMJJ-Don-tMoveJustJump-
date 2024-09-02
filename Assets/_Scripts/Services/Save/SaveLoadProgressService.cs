@@ -13,15 +13,15 @@ public class SaveLoadProgressService : ISaveProgressService
         _persistantProgress = persistantProgress;
     }
 
-    public PlayerProgress LoadProgress() =>
+    public PlayerProgress LoadProgress()=>
         PlayerPrefs.GetString(ProgressKey)?.ToDeserialized<PlayerProgress>();
+    
 
     public void SaveProgress()
     {
         foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriter)
         {
             progressWriter.UpdateProgress(_persistantProgress.Progress);
-            Debug.Log($"SaveLoadService{_persistantProgress.Progress.WorldData.PositionOnLevel.Position.Y}");
         }
 
         PlayerPrefs.SetString(ProgressKey, _persistantProgress.Progress.ToJson());

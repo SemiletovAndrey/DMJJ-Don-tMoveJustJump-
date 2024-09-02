@@ -1,6 +1,8 @@
+using UnityEngine.SceneManagement;
+
 public class LoadProgressState : IState
 {
-
+    private const string LevelInitNameConst = "TrainRoom";
     private readonly IGameStateMachine _gameStateMachine;
     private readonly IPersistantProgressService _progressService;
     private readonly ISaveProgressService _saveProgressService;
@@ -27,8 +29,10 @@ public class LoadProgressState : IState
         PlayerProgress progress = _saveProgressService.LoadProgress();
         if(progress != null)
         {
-            _progressService.Progress.WorldData.PositionOnLevel.Level = progress.WorldData.PositionOnLevel.Level;
-            _progressService.Progress.WorldData.PositionOnLevel.Position = progress.WorldData.PositionOnLevel.Position;
+            _progressService.Progress = progress;
+            //_progressService.Progress.WorldData.PositionOnLevel.Level = progress.WorldData.PositionOnLevel.Level;
+            //_progressService.Progress.WorldData.PositionOnLevel.Position = progress.WorldData.PositionOnLevel.Position;
+            //_progressService.Progress.WorldData.PositionOnLevel.CurrentCheckpointIndex = progress.WorldData.PositionOnLevel.CurrentCheckpointIndex;
         }
         else
         {
@@ -38,7 +42,7 @@ public class LoadProgressState : IState
 
     private PlayerProgress NewProgress()
     {
-        _progressService.Progress.WorldData.PositionOnLevel.Level = "TrainRoom";
+        _progressService.Progress.WorldData.PositionOnLevel.Level = LevelInitNameConst;
         return _progressService.Progress;
     }
 }

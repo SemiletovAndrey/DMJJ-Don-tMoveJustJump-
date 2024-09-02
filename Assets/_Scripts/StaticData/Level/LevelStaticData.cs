@@ -5,9 +5,7 @@ using UnityEngine;
 public class LevelStaticData : ScriptableObject
 {
     public string LevelKey;
-
     public List<Vector3> Checkpoints;
-    public int CurrentCheckpointIndex;
-
     public Vector3 InitialPlayerPoint;
+    public LevelTransferStaticData LevelTransferStaticData;
 }

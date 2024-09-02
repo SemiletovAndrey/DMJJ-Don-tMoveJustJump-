@@ -10,4 +10,6 @@ public interface IEntityFactory
     public GameObject CreatePlayer(Vector3 position);
     public GameObject CreateHud();
     void CleanUp();
+    GameObject CreateSaveTrigger(Vector3 position);
+    GameObject CreateLevelTransfer(string transferTo,Vector3 position);
 }

@@ -7,37 +7,11 @@ public class StateFactory : IStateFactory
 
     public StateFactory(DiContainer container)
     {
-        Debug.Log("StateFactoryConstruct");
         _container = container;
     }
 
-    public BootstrapState CreateBootstrapState()
+    public T CreateTState<T>() where T : IExitableState
     {
-        return _container.Instantiate<BootstrapState>();
-    }
-
-    public GameLoopState CreateGameLoopState()
-    {
-        return _container.Instantiate<GameLoopState>();
-    }
-
-    public LoadLevelState CreateLoadLevelState()
-    {
-        return _container.Instantiate<LoadLevelState>();
-    }
-
-    public LoadProgressState CreateLoadProgressState()
-    {
-        return _container.Instantiate<LoadProgressState>();
-    }
-    
-    public MainMenuState CreateMainMenuState()
-    {
-        return _container.Instantiate<MainMenuState>();
-    }
-
-    public LoadSettingsState CreateLoadSettingsState()
-    {
-        return _container.Instantiate<LoadSettingsState>();
+        return _container.Instantiate<T>();
     }
 }

@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePauseState : MonoBehaviour
+public class GamePauseState : IState
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Enter()
     {
-        
+        Debug.Log("Enter gamePause");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Exit()
     {
-        
+        Debug.Log("Exit gamePause");
     }
 }

@@ -5,7 +5,6 @@ using Zenject;
 
 public class HeroDeath : MonoBehaviour
 {
-    [SerializeField, Range(1, 100)] private float delayTimeDeath = 3f;
     [SerializeField] private ShakingObjectService _shakingObjectService;
     [SerializeField] private Renderer[] _renderers;
     [SerializeField] private Transform transformShaking;
@@ -17,6 +16,7 @@ public class HeroDeath : MonoBehaviour
     private bool _isLieDown = false;
     private ChangeColorService _changeColorService;
     private CharacterSettings _characterSettings;
+    private float _delayTimeDeath;
 
     [Inject]
     public void Construct(CharacterSettings characterSettings)
@@ -30,6 +30,7 @@ public class HeroDeath : MonoBehaviour
         OnDeath += OnDeathHandler;
         _changeColorService = new ChangeColorService(_renderers, _characterSettings.HeroDeathColor);
         _shakingObjectService = new ShakingObjectService(transformShaking, _characterSettings.MaxShakeAmount, _characterSettings.FrequencyDeath);
+        _delayTimeDeath = _characterSettings.DelayTimeDeath;
     }
 
     private void OnEnable()
@@ -61,7 +62,7 @@ public class HeroDeath : MonoBehaviour
     private IEnumerator DeathCoroutine()
     {
         float elapsed = 0f;
-        while (elapsed < delayTimeDeath)
+        while (elapsed < _delayTimeDeath)
         {
             if (CheckUpCharacter())
             {
@@ -72,14 +73,14 @@ public class HeroDeath : MonoBehaviour
                 yield break;
             }
             elapsed += Time.deltaTime;
-            if (elapsed <= delayTimeDeath / 2)
+            if (elapsed <= _delayTimeDeath / 2)
             {
-                _changeColorService.ChangeColor(elapsed / delayTimeDeath);
+                _changeColorService.ChangeColor(elapsed / _delayTimeDeath);
             }
             else
             {
                 Debug.Log("Shake");
-                _shakingObjectService.Shake(elapsed / delayTimeDeath);
+                _shakingObjectService.Shake(elapsed / _delayTimeDeath);
             }
             yield return null;
         }
@@ -116,5 +117,6 @@ public class HeroDeath : MonoBehaviour
     public void Die()
     {
         gameObject.SetActive(false);
+        Instantiate(_characterSettings.DieParticleEffects, transform.position, Quaternion.identity);
     }
 }

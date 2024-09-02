@@ -8,10 +8,10 @@ public class MobileInputSystem : InputService
         SimpleInput.GetButtonDown(Jump);
 
     public override bool IsTurnLeftCameraButton() => 
-        SimpleInput.GetButton(TurnLeftCamera);
+        SimpleInput.GetButton(TurnRightCamera);
 
     public override bool IsTurnRightCameraButton() => 
-        SimpleInput.GetButton(TurnRightCamera);
+        SimpleInput.GetButton(TurnLeftCamera);
 
     public override bool IsResetCameraButton() => 
         SimpleInput.GetButton(ResetCamera);

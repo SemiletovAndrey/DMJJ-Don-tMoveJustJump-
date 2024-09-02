@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StaticDataService : IStaticDataService
 {
@@ -17,13 +18,24 @@ public class StaticDataService : IStaticDataService
         _levels.TryGetValue(sceneKey, out LevelStaticData staticData);
         if (staticData)
         {
-            Debug.Log("Yes");
             return staticData;
         }
         else
         {
-            Debug.Log("No");
             return null;
         }
+    }
+
+    public LevelStaticData GetLevelStaticData()
+    {
+        string sceneKey = SceneStaticService.CurrentLevel();
+        LevelStaticData levelData = this.ForLevel(sceneKey);
+        return levelData;
+    }
+    
+    public LevelStaticData GetLevelStaticData(string sceneKey)
+    {
+        LevelStaticData levelData = this.ForLevel(sceneKey);
+        return levelData;
     }
 }

@@ -17,12 +17,15 @@ public class GameStateMachine : IGameStateMachine, IInitializable
 
     public void InitializeStates()
     {
-        _states[typeof(BootstrapState)] = _stateFactory.CreateBootstrapState();
-        _states[typeof(LoadSettingsState)] = _stateFactory.CreateLoadSettingsState();
-        _states[typeof(LoadProgressState)] = _stateFactory.CreateLoadProgressState();
-        _states[typeof(LoadLevelState)] = _stateFactory.CreateLoadLevelState();
-        _states[typeof(MainMenuState)] = _stateFactory.CreateMainMenuState();
-        _states[typeof(GameLoopState)] = _stateFactory.CreateGameLoopState();
+        _states[typeof(BootstrapState)] = _stateFactory.CreateTState<BootstrapState>();
+        _states[typeof(LoadSettingsState)] = _stateFactory.CreateTState<LoadSettingsState>();
+        _states[typeof(LoadProgressState)] = _stateFactory.CreateTState<LoadProgressState>();
+        _states[typeof(LoadLevelState)] = _stateFactory.CreateTState<LoadLevelState>();
+        _states[typeof(MainMenuState)] = _stateFactory.CreateTState<MainMenuState>();
+        _states[typeof(GameLoopState)] = _stateFactory.CreateTState<GameLoopState>();
+        _states[typeof(GamePauseState)] = _stateFactory.CreateTState<GamePauseState>();
+        _states[typeof(HardRestartStates)] = _stateFactory.CreateTState<HardRestartStates>();
+        _states[typeof(NextLevelTransferState)] = _stateFactory.CreateTState<NextLevelTransferState>();
     }
 
     public void Initialize()

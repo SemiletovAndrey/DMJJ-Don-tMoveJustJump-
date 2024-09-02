@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: TrainRoom
   m_EditorClassIdentifier: 
   LevelKey: TrainRoom
-  Checkpoints: []
-  CurrentCheckpointIndex: 0
+  Checkpoints:
+  - {x: 0.52, y: 0.64, z: -8.12}
+  - {x: 5.3, y: 0.58, z: 1.78}
+  - {x: 4.5, y: 0.58, z: 45.06}
+  - {x: 4.5, y: 0.58, z: 96.8}
   InitialPlayerPoint: {x: 0.52, y: 0.64, z: -8.12}
+  LevelTransferStaticData:
+    TransferTo: LevelGreen_0
+    Position: {x: 0, y: 0.64, z: 0}

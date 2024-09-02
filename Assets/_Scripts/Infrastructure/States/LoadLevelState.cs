@@ -1,29 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-public class LoadLevelState : IPayloadState<string>
+public class LoadLevelState : BaseLoadLevelState, IPayloadState<string>
 {
-    private const string InitialPointTag = "InitialPoint";
-
-    private readonly IGameStateMachine _gameStateMachine;
-    private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _curtain;
-    private IEntityFactory _entityFactory;
-    private IPersistantProgressService _progressService;
-    private IStaticDataService _staticDataService;
 
     [Inject]
-    public LoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService)
+    public LoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, DiContainer container, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService, LoadingCurtain curtain)
+        : base(gameStateMachine, sceneLoader, container, entityFactory, progressService, staticDataService)
     {
-        this._gameStateMachine = gameStateMachine;
-        _sceneLoader = sceneLoader;
         _curtain = curtain;
-        _entityFactory = entityFactory;
-        _progressService = progressService;
-        _staticDataService = staticDataService;
     }
-
 
     public void Enter(string sceneName)
     {
@@ -39,46 +28,27 @@ public class LoadLevelState : IPayloadState<string>
 
     private void OnLoad()
     {
-        LevelStaticData levelData = LevelStaticData();
+        LevelStaticData levelData = _staticDataService.GetLevelStaticData();
 
         GameObject player = InitPlayer(levelData);
         InitHud();
-        InformProgressReaders();
+        InitSaveTrigger(levelData);
+        InitLevelTransfer(levelData);
         CameraFollow(player);
+        InformProgressReaders();
+
         _gameStateMachine.Enter<GameLoopState>();
-        Debug.Log("OnLoad");
-
-    }
-
-    private LevelStaticData LevelStaticData()
-    {
-        string sceneKey = SceneManager.GetActiveScene().name;
-        LevelStaticData levelData = _staticDataService.ForLevel(sceneKey);
-        return levelData;
     }
 
     private GameObject InitPlayer(LevelStaticData levelData)
     {
         GameObject player = _entityFactory.CreatePlayer(levelData.InitialPlayerPoint);
-        
+
         return player;
     }
 
     private void InitHud()
     {
-        GameObject hud = _entityFactory.CreateHud();
-    }
-
-    private void InformProgressReaders()
-    {
-        foreach (ISavedProgressReader reader in _entityFactory.ProgressReader)
-        {
-            reader.LoadProgress(_progressService.Progress);
-            Debug.Log("Read");
-        }
-    }
-    private void CameraFollow(GameObject hero)
-    {
-        Camera.main.GetComponent<CameraFollower>().Follow(hero);
+        _entityFactory.CreateHud();
     }
 }

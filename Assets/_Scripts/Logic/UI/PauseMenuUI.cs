@@ -9,11 +9,15 @@ public class PauseMenuUI : MonoBehaviour
     private ISaveSettingsService _saveSettingsService;
     private IInputService _inputService;
     private SettingsData _settingsData;
+    private bool _isActivePause = false;
+    private bool _isAnimation = false;
+    private UIWindowAnimator _windowAnimator;
 
     [Inject(Id = "MusicSlider")] private Slider _musicSlider;
     [Inject(Id = "SoundSlider")] private Slider _soundSlider;
     [Inject(Id = "SensitivitySlider")] private Slider _sensitivitySlider;
-    
+    [Inject(Id = "PauseContainer")]private RectTransform _pauseRectContainer;
+
 
     [Inject]
     public void Construct(ISaveSettingsService saveSettingsService, IInputService inputService, SettingsData settingsData)
@@ -26,6 +30,7 @@ public class PauseMenuUI : MonoBehaviour
 
     private void Start()
     {
+        _windowAnimator = new UIWindowAnimator(_pauseRectContainer);
         PauseCanvas.gameObject.SetActive(false);
         SetSettingsInStart();
     }
@@ -34,20 +39,27 @@ public class PauseMenuUI : MonoBehaviour
     {
         if (_inputService.IsMenuPause())
         {
-            ActivePause();
+            if (!_isActivePause)
+            {
+                ActivatePause();
+            }
+            else
+            {
+                DeactivatePause();
+            }
+
         }
     }
 
     public void ExitButton()
     {
-        Debug.Log("Exit");
         Application.Quit();
     }
 
     public void ApplyAndContinue()
     {
         ApplySettings();
-        PauseCanvas.gameObject.SetActive(false);
+        DeactivatePause();
     }
 
     public void SetSettingsInStart()
@@ -75,8 +87,42 @@ public class PauseMenuUI : MonoBehaviour
         _settingsData.Sensitivity = _sensitivitySlider.value;
     }
 
-    private void ActivePause()
+    private void ActivatePause()
+    {
+        if (_isAnimation)
+        {
+            return;
+        }
+        _isAnimation = true;
+        PauseCanvas.gameObject.SetActive(true);
+        _windowAnimator.AnimateOnWindow(()=>
+        OnContainer()
+        ); 
+    }
+
+    private void DeactivatePause()
+    {
+        if (_isAnimation)
+        {
+            return;
+        }
+        _isAnimation = true;
+        _windowAnimator.AnimateOffWindow(()=>
+        OffContainer()
+        );
+    }
+
+    private void OffContainer()
+    {
+        PauseCanvas.gameObject.SetActive(false);
+        _isActivePause = false;
+        _isAnimation = false;
+    }
+
+    private void OnContainer()
     {
         PauseCanvas.gameObject.SetActive(true);
+        _isActivePause = true;
+        _isAnimation = false;
     }
 }

@@ -18,15 +18,29 @@ public class SceneLoader
     {
         _coroutineRunner.StartCoroutine(LoadScene(nameScene, onLoaded));
     }
+    public void LoadForRestart(string nameScene, Action onLoaded = null)
+    {
+        _coroutineRunner.StartCoroutine(LoadSceneForRestart(nameScene, onLoaded));
+    }
 
     private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
     {
-        if (SceneManager.GetActiveScene().name == nextScene)
+        if (SceneStaticService.CurrentLevel() == nextScene)
         {
             onLoaded?.Invoke();
             yield break;
         }
 
+        AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
+        while (!waitNextScene.isDone)
+            yield return null;
+        onLoaded?.Invoke();
+
+    }
+    
+    
+    private IEnumerator LoadSceneForRestart(string nextScene, Action onLoaded = null)
+    {
         AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
         while (!waitNextScene.isDone)
             yield return null;

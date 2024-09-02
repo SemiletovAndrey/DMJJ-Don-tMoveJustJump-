@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class HeroMove : MonoBehaviour, ISavedProgress
@@ -28,6 +27,11 @@ public class HeroMove : MonoBehaviour, ISavedProgress
         _camera = Camera.main;
     }
 
+    private void OnEnable()
+    {
+        _camera = Camera.main;
+    }
+
     private void Update()
     {
         CalculateMovement();
@@ -41,14 +45,15 @@ public class HeroMove : MonoBehaviour, ISavedProgress
 
     public void UpdateProgress(PlayerProgress progress)
     {
-        progress.WorldData.PositionOnLevel.Level = CurrentLevel();
+        progress.WorldData.PositionOnLevel.Level = SceneStaticService.CurrentLevel();
         progress.WorldData.PositionOnLevel.Position = this.transform.position.AsVectorSeril();
     }
 
     public void LoadProgress(PlayerProgress progress)
     {
-        if (CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
+        if (SceneStaticService.CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
         {
+            Debug.Log("Load prodress hero move");
             Vector3Serial savedPosition = progress.WorldData.PositionOnLevel.Position;
             if (savedPosition != null)
             {
@@ -66,6 +71,12 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     {
         RbPlayer.isKinematic = true;
         transform.position = to.AsUnityVector().AddY(RbPlayer.transform.localScale.y);
+        RbPlayer.isKinematic = false;
+    }
+    public void Warp(Vector3 to)
+    {
+        RbPlayer.isKinematic = true;
+        transform.position = to + new Vector3(0, RbPlayer.transform.localScale.y,0);
         RbPlayer.isKinematic = false;
     }
 
@@ -114,11 +125,4 @@ public class HeroMove : MonoBehaviour, ISavedProgress
             }
         }
     }
-
-    private static string CurrentLevel()
-    {
-        return SceneManager.GetActiveScene().name;
-    }
-
-
 }

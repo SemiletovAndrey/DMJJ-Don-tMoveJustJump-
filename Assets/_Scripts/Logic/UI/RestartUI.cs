@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using Zenject;
 
@@ -10,11 +8,16 @@ public class RestartUI : MonoBehaviour
 
     [Inject] private DiContainer _container;
     [Inject] private IPersistantProgressService _persistantProgress;
+    [Inject] private IGameStateMachine _gameStateMachine;
+    [Inject(Id = "RestartContainer")]private RectTransform _restartRectContainer;
     private GameObject _player;
     private RestartService _restartService;
+    private UIWindowAnimator _windowAnimator;
+
 
     private void Start()
     {
+        _windowAnimator = new UIWindowAnimator(_restartRectContainer);  
         DieCanvas.gameObject.SetActive(false);
         EventBus.OnHeroDeath += OnHeroDeath;
     }
@@ -30,14 +33,25 @@ public class RestartUI : MonoBehaviour
         {
             _player = _container.ResolveId<GameObject>("Player");
         }
-        _restartService = new RestartService(_player,_persistantProgress);
+        _restartService = new RestartService(_player,_persistantProgress, _gameStateMachine);
         _restartService.Restart();
+        SetActiveOffRestartCanvas();
+    }
+
+    public void HardRestart()
+    {
+        if (_player == null)
+        {
+            _player = _container.ResolveId<GameObject>("Player");
+        }
+        _restartService = new RestartService(_player, _persistantProgress, _gameStateMachine);
+        _restartService.HardRestart();
         SetActiveOffRestartCanvas();
     }
 
     private void SetActiveOnRestartCanvas()
     {
-        DieCanvas.gameObject.SetActive(true);
+        StartCoroutine(SetActiveRestartCoroutine());
     }
 
     private void SetActiveOffRestartCanvas()
@@ -49,4 +63,12 @@ public class RestartUI : MonoBehaviour
     {
         SetActiveOnRestartCanvas();
     }
+
+    private IEnumerator SetActiveRestartCoroutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+        DieCanvas.gameObject.SetActive(true);
+        _windowAnimator.AnimateExpandWindow(Vector3.one);
+    }
+
 }

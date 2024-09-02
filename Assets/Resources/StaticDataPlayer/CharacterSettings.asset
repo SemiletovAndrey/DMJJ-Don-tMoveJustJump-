@@ -16,5 +16,7 @@ MonoBehaviour:
   MovementForceOnGround: 25
   JumpForce: 30
   HeroDeathColor: {r: 1, g: 0.043004725, b: 0, a: 1}
+  DelayTimeDeath: 6
   FrequencyDeath: 20
   MaxShakeAmount: 0.05
+  DieParticleEffects: {fileID: 1624607036711036880, guid: d860d7a44f81d6645a5d0eef278cc91e, type: 3}
