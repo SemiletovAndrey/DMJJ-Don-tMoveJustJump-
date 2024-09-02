@@ -11,4 +11,5 @@ public interface IEntityFactory
     public GameObject CreateHud();
     void CleanUp();
     GameObject CreateSaveTrigger(Vector3 position);
+    GameObject CreateLevelTransfer(string transferTo,Vector3 position);
 }

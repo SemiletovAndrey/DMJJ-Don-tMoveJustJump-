@@ -25,6 +25,7 @@ public class GameStateMachine : IGameStateMachine, IInitializable
         _states[typeof(GameLoopState)] = _stateFactory.CreateTState<GameLoopState>();
         _states[typeof(GamePauseState)] = _stateFactory.CreateTState<GamePauseState>();
         _states[typeof(HardRestartStates)] = _stateFactory.CreateTState<HardRestartStates>();
+        _states[typeof(NextLevelTransferState)] = _stateFactory.CreateTState<NextLevelTransferState>();
     }
 
     public void Initialize()

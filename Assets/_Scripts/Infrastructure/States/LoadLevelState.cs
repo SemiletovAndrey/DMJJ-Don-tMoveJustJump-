@@ -43,6 +43,7 @@ public class LoadLevelState : IPayloadState<string>
         GameObject player = InitPlayer(levelData);
         InitHud();
         InitSaveTrigger(levelData);
+        InitLevelTransfer(levelData);
         InformProgressReaders();
         CameraFollow(player);
         _gameStateMachine.Enter<GameLoopState>();
@@ -51,8 +52,6 @@ public class LoadLevelState : IPayloadState<string>
     private void InitSaveTrigger(LevelStaticData levelStaticData)
     {
         int positionIndex = _progressService.Progress.WorldData.PositionOnLevel.CurrentCheckpointIndex;
-        Debug.Log($"Position index {positionIndex}");
-        Debug.Log($"Checkpoints count {levelStaticData.Checkpoints.Count}");
         if (positionIndex < levelStaticData.Checkpoints.Count)
         {
             _entityFactory.CreateSaveTrigger(levelStaticData.Checkpoints[positionIndex]);
@@ -64,6 +63,11 @@ public class LoadLevelState : IPayloadState<string>
         GameObject player = _entityFactory.CreatePlayer(levelData.InitialPlayerPoint);
 
         return player;
+    }
+    
+    private void InitLevelTransfer(LevelStaticData levelData)
+    {
+        _entityFactory.CreateLevelTransfer(levelData.LevelTransferStaticData.TransferTo,levelData.LevelTransferStaticData.Position);
     }
 
     private void InitHud()

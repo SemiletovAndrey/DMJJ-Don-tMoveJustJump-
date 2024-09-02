@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class HeroMove : MonoBehaviour, ISavedProgress
@@ -72,6 +71,12 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     {
         RbPlayer.isKinematic = true;
         transform.position = to.AsUnityVector().AddY(RbPlayer.transform.localScale.y);
+        RbPlayer.isKinematic = false;
+    }
+    public void Warp(Vector3 to)
+    {
+        RbPlayer.isKinematic = true;
+        transform.position = to + new Vector3(0, RbPlayer.transform.localScale.y,0);
         RbPlayer.isKinematic = false;
     }
 

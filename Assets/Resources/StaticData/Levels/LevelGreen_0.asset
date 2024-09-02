@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e12602e9ce9d25f4c8d257126f7066df, type: 3}
-  m_Name: TrainRoom
+  m_Name: LevelGreen_0
   m_EditorClassIdentifier: 
-  LevelKey: TrainRoom
+  LevelKey: LevelGreen_0
   Checkpoints:
   - {x: 0.52, y: 0.64, z: -8.12}
   - {x: 5.3, y: 0.58, z: 1.78}
@@ -20,5 +20,5 @@ MonoBehaviour:
   - {x: 4.5, y: 0.58, z: 96.8}
   InitialPlayerPoint: {x: 0.52, y: 0.64, z: -8.12}
   LevelTransferStaticData:
-    TransferTo: LevelGreen_0
-    Position: {x: 0, y: 0.64, z: 0}
+    TransferTo: LevelGreen_1
+    Position: {x: 5, y: 0.64, z: -8.12}

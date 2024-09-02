@@ -32,4 +32,10 @@ public class StaticDataService : IStaticDataService
         LevelStaticData levelData = this.ForLevel(sceneKey);
         return levelData;
     }
+    
+    public LevelStaticData GetLevelStaticData(string sceneKey)
+    {
+        LevelStaticData levelData = this.ForLevel(sceneKey);
+        return levelData;
+    }
 }
