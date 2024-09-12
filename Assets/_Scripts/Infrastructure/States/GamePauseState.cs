@@ -6,11 +6,11 @@ public class GamePauseState : IState
 {
     public void Enter()
     {
-        Debug.Log("Enter gamePause");
+        Time.timeScale = 0f;
     }
 
     public void Exit()
     {
-        Debug.Log("Exit gamePause");
+        
     }
 }

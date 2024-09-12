@@ -7,6 +7,7 @@ public class PauseMenuUI : MonoBehaviour
     [SerializeField] private Canvas PauseCanvas;
 
     private ISaveSettingsService _saveSettingsService;
+    private IGameStateMachine _gameStateMachine;
     private IInputService _inputService;
     private SettingsData _settingsData;
     private bool _isActivePause = false;
@@ -20,11 +21,12 @@ public class PauseMenuUI : MonoBehaviour
 
 
     [Inject]
-    public void Construct(ISaveSettingsService saveSettingsService, IInputService inputService, SettingsData settingsData)
+    public void Construct(ISaveSettingsService saveSettingsService, IInputService inputService, SettingsData settingsData, IGameStateMachine gameStateMachine)
     {
         _saveSettingsService = saveSettingsService;
         _inputService = inputService;
         _settingsData = settingsData;
+        _gameStateMachine = gameStateMachine;
     }
 
 
@@ -106,6 +108,7 @@ public class PauseMenuUI : MonoBehaviour
         {
             return;
         }
+        _gameStateMachine.Enter<GameLoopState>();
         _isAnimation = true;
         _windowAnimator.AnimateOffWindow(()=>
         OffContainer()
@@ -124,5 +127,6 @@ public class PauseMenuUI : MonoBehaviour
         PauseCanvas.gameObject.SetActive(true);
         _isActivePause = true;
         _isAnimation = false;
+        _gameStateMachine.Enter<GamePauseState>();
     }
 }

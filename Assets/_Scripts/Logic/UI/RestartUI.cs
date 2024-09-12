@@ -36,6 +36,8 @@ public class RestartUI : MonoBehaviour
         _restartService = new RestartService(_player,_persistantProgress, _gameStateMachine);
         _restartService.Restart();
         SetActiveOffRestartCanvas();
+        _gameStateMachine.Enter<GameLoopState>();
+
     }
 
     public void HardRestart()
@@ -46,6 +48,7 @@ public class RestartUI : MonoBehaviour
         }
         _restartService = new RestartService(_player, _persistantProgress, _gameStateMachine);
         _restartService.HardRestart();
+        _gameStateMachine.Enter<GameLoopState>();
         SetActiveOffRestartCanvas();
     }
 
@@ -56,6 +59,7 @@ public class RestartUI : MonoBehaviour
 
     private void SetActiveOffRestartCanvas()
     {
+        Debug.Log("Die cNVAS OFF");
         DieCanvas.gameObject.SetActive(false);
     }
 

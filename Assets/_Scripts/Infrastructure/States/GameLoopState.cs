@@ -10,7 +10,7 @@ public class GameLoopState : IState
     }
     public void Enter()
     {
-
+        Time.timeScale = 1f;
     }
 
     public void Exit()
