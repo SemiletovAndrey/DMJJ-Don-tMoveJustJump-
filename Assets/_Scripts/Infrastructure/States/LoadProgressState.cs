@@ -2,7 +2,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadProgressState : IState
 {
-    private const string LevelInitNameConst = "TrainRoom";
+    private const string LevelInitNameConst = "LevelGreen_0";
     private readonly IGameStateMachine _gameStateMachine;
     private readonly IPersistantProgressService _progressService;
     private readonly ISaveProgressService _saveProgressService;
@@ -30,9 +30,6 @@ public class LoadProgressState : IState
         if(progress != null)
         {
             _progressService.Progress = progress;
-            //_progressService.Progress.WorldData.PositionOnLevel.Level = progress.WorldData.PositionOnLevel.Level;
-            //_progressService.Progress.WorldData.PositionOnLevel.Position = progress.WorldData.PositionOnLevel.Position;
-            //_progressService.Progress.WorldData.PositionOnLevel.CurrentCheckpointIndex = progress.WorldData.PositionOnLevel.CurrentCheckpointIndex;
         }
         else
         {

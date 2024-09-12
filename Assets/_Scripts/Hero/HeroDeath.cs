@@ -28,6 +28,7 @@ public class HeroDeath : MonoBehaviour
     {
         _renderers = gameObject.GetComponentsInChildren<Renderer>();
         OnDeath += OnDeathHandler;
+        EventBus.OnHeroDeath += Die;
         _changeColorService = new ChangeColorService(_renderers, _characterSettings.HeroDeathColor);
         _shakingObjectService = new ShakingObjectService(transformShaking, _characterSettings.MaxShakeAmount, _characterSettings.FrequencyDeath);
         _delayTimeDeath = _characterSettings.DelayTimeDeath;
@@ -41,6 +42,7 @@ public class HeroDeath : MonoBehaviour
     private void OnDestroy()
     {
         OnDeath -= OnDeathHandler;
+        EventBus.OnHeroDeath -= Die;
     }
 
     public void OnCollisionStay(Collision collision)
@@ -106,7 +108,6 @@ public class HeroDeath : MonoBehaviour
         _shakingObjectService.ResetPosition();
         StopCoroutine(_coroutineDeath);
         EventBus.OnHeroDeath?.Invoke();
-        Die();
     }
 
     public void ResetColor()
