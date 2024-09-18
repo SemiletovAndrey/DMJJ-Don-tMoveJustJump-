@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 6069831014089736404}
   - component: {fileID: 4705113727890498754}
   - component: {fileID: 921410291880137194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Isl_9_Box_1 Variant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5782081336111778336
 Transform:
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 1112335410163778333}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.44, y: -0.16, z: -1.96}
-  m_LocalScale: {x: 3.29, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.29, y: 1.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2557568469179917492}
@@ -114,12 +114,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2557568469179917492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2557568469179917492
 Transform:

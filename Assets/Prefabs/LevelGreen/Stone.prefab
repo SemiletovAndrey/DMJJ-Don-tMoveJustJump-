@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3388302920710455050}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3388302920710455050
 Transform:
@@ -44,12 +44,12 @@ GameObject:
   - component: {fileID: 3980970054945752017}
   - component: {fileID: 7589312126571391147}
   - component: {fileID: 2257072948233826067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Isl_9_Stone_1 Variant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &4071956916272685576
 Transform:
@@ -59,13 +59,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196328246486884920}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 48.71, y: 20, z: 17.13}
+  m_LocalRotation: {x: -0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: -2.7, z: 29}
+  m_LocalScale: {x: 118.65, y: 20, z: 167.65}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3388302920710455050}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -5, y: 0, z: 0}
 --- !u!33 &3980970054945752017
 MeshFilter:
   m_ObjectHideFlags: 0

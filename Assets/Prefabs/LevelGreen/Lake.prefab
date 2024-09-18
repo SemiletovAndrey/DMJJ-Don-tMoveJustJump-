@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6507887772662412315}
   - component: {fileID: 3371048568413415959}
   - component: {fileID: 2817801221073975763}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Isl_6_Lake_1 Variant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8421996950977045878}
-  m_Layer: 0
+  - component: {fileID: 3070789810871364176}
+  - component: {fileID: 5049475171031097878}
+  m_Layer: 8
   m_Name: Lake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,3 +117,36 @@ Transform:
   - {fileID: 6507887772662412315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3070789810871364176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8876885496454573651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951bf7a5af51a94aa9ceae4068d359e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &5049475171031097878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8876885496454573651}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 18.834324, y: 2.2300024, z: 13.760796}
+  m_Center: {x: 0.05716133, y: -0.2599988, z: 0.11432266}

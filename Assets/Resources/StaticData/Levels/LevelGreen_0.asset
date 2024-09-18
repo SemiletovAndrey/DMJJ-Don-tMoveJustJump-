@@ -15,10 +15,11 @@ MonoBehaviour:
   LevelKey: LevelGreen_0
   Checkpoints:
   - {x: 0.52, y: -1.5, z: -8.12}
-  - {x: 0, y: -1.5, z: 72}
-  - {x: 0, y: -1.5, z: 110}
-  - {x: 4.5, y: -1.5, z: 96.8}
+  - {x: 0, y: -1.5, z: 70}
+  - {x: 0, y: -1.5, z: 135}
+  - {x: 0, y: -1.5, z: 175}
+  - {x: 3.5, y: -1.5, z: 275}
   InitialPlayerPoint: {x: 0.52, y: 0.64, z: -8.12}
   LevelTransferStaticData:
     TransferTo: LevelGreen_1
-    Position: {x: 5, y: 0.64, z: 140}
+    Position: {x: 18.9, y: -1.5, z: 337.4}

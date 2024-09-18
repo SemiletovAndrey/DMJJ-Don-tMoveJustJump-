@@ -20,11 +20,15 @@ public class RestartUI : MonoBehaviour
         _windowAnimator = new UIWindowAnimator(_restartRectContainer);  
         DieCanvas.gameObject.SetActive(false);
         EventBus.OnHeroDeath += OnHeroDeath;
+        EventBus.OnRestart += Restart;
+        EventBus.OnHardRestart += HardRestart;
     }
 
     private void OnDestroy()
     {
         EventBus.OnHeroDeath -= OnHeroDeath;
+        EventBus.OnRestart -= Restart;
+        EventBus.OnHardRestart -= HardRestart;
     }
 
     public void Restart()
@@ -59,7 +63,6 @@ public class RestartUI : MonoBehaviour
 
     private void SetActiveOffRestartCanvas()
     {
-        Debug.Log("Die cNVAS OFF");
         DieCanvas.gameObject.SetActive(false);
     }
 
