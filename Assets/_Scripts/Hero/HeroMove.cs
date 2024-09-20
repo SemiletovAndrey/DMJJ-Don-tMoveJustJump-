@@ -4,6 +4,7 @@ using Zenject;
 public class HeroMove : MonoBehaviour, ISavedProgress
 {
     [SerializeField] private Rigidbody RbPlayer;
+    [SerializeField] private HeroAnimator HeroAnimator;
 
     private IInputService _inputService;
     private CharacterSettings _characterSettings;
@@ -85,6 +86,10 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     {
         if (!_isTriggered)
         {
+            if (_isJumped)
+            {
+                HeroAnimator.PlayLand();
+            }
             _isJumped = false;
             _isTriggered = true;
         }
@@ -106,6 +111,7 @@ public class HeroMove : MonoBehaviour, ISavedProgress
         if (!_isJumped && _inputService.IsJumpButtonUp())
         {
             RbPlayer.AddForce(Vector3.up * _characterSettings.JumpForce, ForceMode.Impulse);
+            HeroAnimator.PlayJump();
             _isJumped = true;
             _isTriggered = false;
         }

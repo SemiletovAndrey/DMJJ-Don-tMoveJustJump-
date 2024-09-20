@@ -13946,7 +13946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _following: {fileID: 0}
   RotationAngleX: 35
-  Distance: 14
+  Distance: 10
   offsetY: 2
   _rotationSpeed: 100
 --- !u!114 &963194230
