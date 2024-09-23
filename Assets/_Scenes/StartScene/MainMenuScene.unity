@@ -1408,6 +1408,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3534830886767242813, guid: 7404e7392d59a0b40bcda41c02a47bcb, type: 3}
+      propertyPath: snapRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4739203296951537399, guid: 7404e7392d59a0b40bcda41c02a47bcb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1543,13 +1547,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &2602847871889676159 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7449228578395163683, guid: 7404e7392d59a0b40bcda41c02a47bcb, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5129918833854765327, guid: 7404e7392d59a0b40bcda41c02a47bcb, type: 3}
   m_PrefabInstance: {fileID: 2602847871889676156}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2602847871889676160 stripped

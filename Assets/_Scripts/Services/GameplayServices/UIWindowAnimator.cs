@@ -6,10 +6,10 @@ public class UIWindowAnimator
 {
     private RectTransform windowRect;
     private float startYPosition = 1000f;  
-    private float endYPosition = -150f;   
+    private float endYPosition = 0f;   
     private float fallDuration = 0.35f;  
     private float upDuration = 0.2f;  
-    private float bounceDuration = 0.05f;
+    private float bounceDuration = 0.1f;
 
     private float scaleDuration = 0.5f;
 

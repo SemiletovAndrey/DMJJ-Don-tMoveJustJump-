@@ -10,7 +10,7 @@ public class SettingsData
     public float MusicVolume;
     public float _sensitivity;
     public GraphicsSettingsEnum GraphicsSettings;
-    public bool LockFPS;
+    public float LockFPS;
 
     public float Sensitivity
     {

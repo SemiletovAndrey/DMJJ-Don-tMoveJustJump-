@@ -17,7 +17,7 @@ public class MainMenuUI : MonoBehaviour
     [Inject(Id = "SoundSlider")] private Slider _soundSlider;
     [Inject(Id = "SensitivitySlider")] private Slider _sensitivitySlider;
     [Inject(Id = "GraphicQuality")] private TMP_Dropdown _graphicQualityDropdown;
-    [Inject(Id = "LockFPS")] private Toggle _lockFPSToggle;
+    [Inject(Id = "LockFPS")] private Slider _lockFPSToggle;
     [Inject(Id = "Language")] private TMP_Dropdown _languageDropdown;
 
     [Inject]
@@ -57,6 +57,7 @@ public class MainMenuUI : MonoBehaviour
     private void ApplySettings()
     {
         GetSettingData();
+        Application.targetFrameRate = (int)_lockFPSToggle.value;
         _saveSettingsService.SaveSettings(_settingsData);
     }
 
@@ -65,7 +66,7 @@ public class MainMenuUI : MonoBehaviour
         _settingsData.MusicVolume = _musicSlider.value;
         _settingsData.SoundVolume = _soundSlider.value;
         _settingsData.Sensitivity = _sensitivitySlider.value;
-        _settingsData.LockFPS = _lockFPSToggle.isOn;
+        _settingsData.LockFPS = _lockFPSToggle.value;
         _settingsData.Language = DropdownEnumUtility.GetSelectedEnumValue<LanguageEnum>(_languageDropdown);
         _settingsData.GraphicsSettings = DropdownEnumUtility.GetSelectedEnumValue<GraphicsSettingsEnum>(_graphicQualityDropdown);
     }
@@ -75,7 +76,7 @@ public class MainMenuUI : MonoBehaviour
         _musicSlider.value = _settingsData.MusicVolume;
         _soundSlider.value = _settingsData.SoundVolume;
         _sensitivitySlider.value = _settingsData.Sensitivity;
-        _lockFPSToggle.isOn = _settingsData.LockFPS;
+        _lockFPSToggle.value = _settingsData.LockFPS;
         DropdownEnumUtility.SetupDropdown(_languageDropdown, _settingsData.Language);
         DropdownEnumUtility.SetupDropdown(_graphicQualityDropdown, _settingsData.GraphicsSettings);
     }
