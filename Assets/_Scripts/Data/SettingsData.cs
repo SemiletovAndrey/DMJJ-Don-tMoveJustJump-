@@ -5,7 +5,7 @@ public class SettingsData
 {
     public event Action<float> OnSensitivityChanged;
 
-    public LanguageEnum Language;
+    public string Language;
     public float SoundVolume;
     public float MusicVolume;
     public float _sensitivity;

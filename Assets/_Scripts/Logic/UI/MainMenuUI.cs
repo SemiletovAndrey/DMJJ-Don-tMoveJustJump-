@@ -67,7 +67,6 @@ public class MainMenuUI : MonoBehaviour
         _settingsData.SoundVolume = _soundSlider.value;
         _settingsData.Sensitivity = _sensitivitySlider.value;
         _settingsData.LockFPS = _lockFPSToggle.value;
-        _settingsData.Language = DropdownEnumUtility.GetSelectedEnumValue<LanguageEnum>(_languageDropdown);
         _settingsData.GraphicsSettings = DropdownEnumUtility.GetSelectedEnumValue<GraphicsSettingsEnum>(_graphicQualityDropdown);
     }
 
@@ -77,7 +76,30 @@ public class MainMenuUI : MonoBehaviour
         _soundSlider.value = _settingsData.SoundVolume;
         _sensitivitySlider.value = _settingsData.Sensitivity;
         _lockFPSToggle.value = _settingsData.LockFPS;
-        DropdownEnumUtility.SetupDropdown(_languageDropdown, _settingsData.Language);
+
+        int index = SetDropDownLanguage(_settingsData.Language);
+        _languageDropdown.value = index;
         DropdownEnumUtility.SetupDropdown(_graphicQualityDropdown, _settingsData.GraphicsSettings);
+    }
+
+    public int SetDropDownLanguage(string language)
+    {
+        string cipherLanguage;
+        switch (language)
+        {
+            case "en_US":
+                cipherLanguage = "English";
+                break;
+            case "ru_RU":
+                cipherLanguage = "Русский";
+                break;
+            case "ua_UA":
+                cipherLanguage = "Українська";
+                break;
+            default:
+                cipherLanguage = "English";
+                break;
+        }
+        return _languageDropdown.options.FindIndex(option => option.text == cipherLanguage);
     }
 }

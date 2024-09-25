@@ -1,25 +1,34 @@
-
 using UnityEngine;
 using Zenject;
 
 public class LoadSettingsState : IState
 {
+    private const string MainMenuName = "MainMenuScene";
+
     private readonly IGameStateMachine _gameStateMachine;
     private readonly ISaveSettingsService _saveSettingsService;
     private SettingsData _settingsData;
+    private readonly SceneLoader _sceneLoader;
+
 
     [Inject]
-    public LoadSettingsState(IGameStateMachine gameStateMachine, ISaveSettingsService saveSettingsService, SettingsData settingsData)
+    public LoadSettingsState(IGameStateMachine gameStateMachine, ISaveSettingsService saveSettingsService, SettingsData settingsData, SceneLoader sceneLoader)
     {
         _gameStateMachine = gameStateMachine;
         _saveSettingsService = saveSettingsService;
         _settingsData = settingsData;
+        _sceneLoader = sceneLoader;
     }
 
     public void Enter()
     {
         Debug.Log("LoadSettingState");
         LoadProgressOrInitNew();
+        _sceneLoader.Load(MainMenuName, OnLoad);
+    }
+
+    private void OnLoad()
+    {
         _gameStateMachine.Enter<MainMenuState>();
     }
 
@@ -48,7 +57,7 @@ public class LoadSettingsState : IState
     private SettingsData NewSettings()
     {
         Debug.Log("New Settings");
-        _settingsData.Language = LanguageEnum.English;
+        _settingsData.Language = "en_US";
         _settingsData.MusicVolume = 0.5f;
         _settingsData.SoundVolume = 0.5f;
         _settingsData.Sensitivity = 100f;
