@@ -1,6 +1,66 @@
 {
-    "Items": [
-        {"Key": "settings", "Value": "Налаштування"}
-    ]
+  "Items": [
+    {
+      "Key": "settings",
+      "Value": "НАЛАШТУВАННЯ"
+    },
+    {
+      "Key": "start",
+      "Value": "ПОЧАТОК ГРИ"
+    },
+    {
+      "Key": "exit",
+      "Value": "ВИХІД"
+    },
+    {
+      "Key": "music",
+      "Value": "МУЗИКА"
+    },
+    {
+      "Key": "sound",
+      "Value": "ЗВУКИ"
+    },
+    {
+      "Key": "sensitivity",
+      "Value": "ЧУТЛИВІСТЬ"
+    },
+    {
+      "Key": "graphics_quality",
+      "Value": "ЯКІСТЬ ГРАФІКИ"
+    },
+    {
+      "Key": "lock_fps",
+      "Value": "БЛОКУВАННЯ FPS"
+    },
+    {
+      "Key": "language",
+      "Value": "МОВА"
+    },
+    {
+      "Key": "apply_settings_button",
+      "Value": "ЗАСТОСУВАННЯ НАЛАШТУВАНЬ"
+    },
+    {
+      "Key": "close_button",
+      "Value": "ЗАКРИТИ"
+    },
+    {
+      "Key": "pause",
+      "Value": "ПАУЗА"
+    },
+    {
+      "Key": "continue",
+      "Value": "ПРОДОВЖИТИ"
+    },
+    {
+      "Key": "restart",
+      "Value": "ПЕРЕЗАПУСТИТИ"
+    },
+    {
+      "Key": "hard_restart",
+      "Value": "ЖОРСТКИЙ ПЕРЕЗАПУСК"
+    }
+
+  ]
 
 }

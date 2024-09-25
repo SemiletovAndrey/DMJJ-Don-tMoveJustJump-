@@ -91,10 +91,13 @@ public class MainMenuUI : MonoBehaviour
                 cipherLanguage = "English";
                 break;
             case "ru_RU":
-                cipherLanguage = "Русский";
+                cipherLanguage = "Russian";
                 break;
             case "ua_UA":
-                cipherLanguage = "Українська";
+                cipherLanguage = "Ukrainian";
+                break;
+            case "es_ES":
+                cipherLanguage = "Spanish";
                 break;
             default:
                 cipherLanguage = "English";

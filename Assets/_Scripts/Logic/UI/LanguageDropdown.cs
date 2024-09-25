@@ -25,11 +25,14 @@ public class LanguageDropdown : MonoBehaviour
             case "English":
                 localizationManager.CurrentLanguage = "en_US";
                 break;
-            case "Русский":
+            case "Russian":
                 localizationManager.CurrentLanguage = "ru_RU";
                 break;
-            case "Українська":
+            case "Ukrainian":
                 localizationManager.CurrentLanguage = "ua_UA";
+                break;
+            case "Spanish":
+                localizationManager.CurrentLanguage = "es_ES";
                 break;
             default:
                 localizationManager.CurrentLanguage = "en_US";

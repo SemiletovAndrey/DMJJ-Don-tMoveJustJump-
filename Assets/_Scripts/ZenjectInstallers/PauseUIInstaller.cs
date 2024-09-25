@@ -9,6 +9,7 @@ public class PauseUIInstaller : MonoInstaller
     public Slider SensitivitySlider;
     public RectTransform PauseRectTransform;
     public RectTransform RestartRectTransform;
+    public LocalizationManager LocalizationManager;
 
     public override void InstallBindings()
     {
@@ -17,6 +18,7 @@ public class PauseUIInstaller : MonoInstaller
         Container.Bind<Slider>().WithId("SensitivitySlider").FromInstance(SensitivitySlider);
         Container.Bind<RectTransform>().WithId("PauseContainer").FromInstance(PauseRectTransform);
         Container.Bind<RectTransform>().WithId("RestartContainer").FromInstance(RestartRectTransform);
+        Container.Bind<LocalizationManager>().FromInstance(LocalizationManager);
 
         Container.Bind<HeroDeath>().FromComponentInHierarchy().AsSingle();
     }

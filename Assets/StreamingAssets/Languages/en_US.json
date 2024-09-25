@@ -1,6 +1,65 @@
 {
-    "Items": [
-        {"Key": "settings", "Value": "SETTINGS"}
-    ]
+  "Items": [
+    {
+      "Key": "settings",
+      "Value": "SETTINGS"
+    },
+    {
+      "Key": "start",
+      "Value": "START GAME"
+    },
+    {
+      "Key": "exit",
+      "Value": "EXIT"
+    },
+    {
+      "Key": "music",
+      "Value": "MUSIC"
+    },
+    {
+      "Key": "sound",
+      "Value": "SOUND"
+    },
+    {
+      "Key": "sensitivity",
+      "Value": "SENSITIVITY"
+    },
+    {
+      "Key": "graphics_quality",
+      "Value": "GRAPHICS QUALITY"
+    },
+    {
+      "Key": "lock_fps",
+      "Value": "LOCK FPS"
+    },
+    {
+      "Key": "language",
+      "Value": "LANGUAGE"
+    },
+    {
+      "Key": "apply_settings_button",
+      "Value": "APPLY SETTINGS"
+    },
+    {
+      "Key": "close_button",
+      "Value": "CLOSE"
+    },
+    {
+      "Key": "pause",
+      "Value": "PAUSE"
+    },
+    {
+      "Key": "continue",
+      "Value": "CONTINUE"
+    },
+    {
+      "Key": "restart",
+      "Value": "RESTART"
+    },
+    {
+      "Key": "hard_restart",
+      "Value": "HARD RESTART"
+    }
+  ]
 
 }

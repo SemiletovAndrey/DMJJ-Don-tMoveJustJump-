@@ -2,63 +2,63 @@
   "Items": [
     {
       "Key": "settings",
-      "Value": "НАСТРОЙКИ"
+      "Value": "AJUSTES"
     },
     {
       "Key": "start",
-      "Value": "НАЧАТЬ ИГРУ"
+      "Value": "COMENZAR JUEGO"
     },
     {
       "Key": "exit",
-      "Value": "ВЫХОД"
+      "Value": "SALIR"
     },
     {
       "Key": "music",
-      "Value": "МУЗЫКА"
+      "Value": "MÚSICA"
     },
     {
       "Key": "sound",
-      "Value": "ЗВУКИ"
+      "Value": "SONIDO"
     },
     {
       "Key": "sensitivity",
-      "Value": "ЧУВСТВИТЕЛЬНОСТЬ"
+      "Value": "SENSIBILIDAD"
     },
     {
       "Key": "graphics_quality",
-      "Value": "КАЧЕСТВО ГРАФИКИ"
+      "Value": "CALIDAD GRÁFICA"
     },
     {
       "Key": "lock_fps",
-      "Value": "БЛОКИРОВКА FPS"
+      "Value": "BLOQUEAR FPS"
     },
     {
       "Key": "language",
-      "Value": "ЯЗЫК"
+      "Value": "IDIOMA"
     },
     {
       "Key": "apply_settings_button",
-      "Value": "ПРИМЕНЕНИЕ НАСТРОЕК"
+      "Value": "APLICAR AJUSTES"
     },
     {
       "Key": "close_button",
-      "Value": "ЗАКРЫТЬ"
+      "Value": "CERRAR"
     },
     {
       "Key": "pause",
-      "Value": "ПАУЗА"
+      "Value": "PAUSA"
     },
     {
       "Key": "continue",
-      "Value": "ПРОДОЛЖИТЬ"
+      "Value": "CONTINÚE"
     },
     {
       "Key": "restart",
-      "Value": "ПЕРЕЗАПУСТИТЬ"
+      "Value": "REINICIAR"
     },
     {
       "Key": "hard_restart",
-      "Value": "ЖОСТКИЙ ПЕРЕЗАПУСК"
+      "Value": "REINICIO DURO"
     }
 
   ]
