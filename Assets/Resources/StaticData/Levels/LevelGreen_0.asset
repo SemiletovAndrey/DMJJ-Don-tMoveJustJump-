@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: LevelGreen_0
   Checkpoints:
-  - {x: 0.52, y: -1.5, z: -8.12}
-  - {x: 0, y: -1.5, z: 70}
-  - {x: 0, y: -1.5, z: 135}
-  - {x: 0, y: -1.5, z: 175}
-  - {x: 3.5, y: -1.5, z: 275}
+  - {x: 0.96, y: -1.69, z: -8.12}
+  - {x: 0.96, y: -1.69, z: 29.68}
+  - {x: 0.96, y: -1.69, z: 74.4}
+  - {x: 0.96, y: -1.69, z: 133.4}
+  - {x: 0.96, y: -1.69, z: 176.3}
+  - {x: 0.96, y: -1.69, z: 268.7}
   InitialPlayerPoint: {x: 0.52, y: 0.64, z: -8.12}
   LevelTransferStaticData:
     TransferTo: LevelGreen_1
