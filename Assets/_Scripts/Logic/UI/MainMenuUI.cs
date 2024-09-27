@@ -67,6 +67,7 @@ public class MainMenuUI : MonoBehaviour
         _settingsData.SoundVolume = _soundSlider.value;
         _settingsData.Sensitivity = _sensitivitySlider.value;
         _settingsData.LockFPS = _lockFPSToggle.value;
+        _settingsData.Language = GetDropDownLanguage(_languageDropdown.options[_languageDropdown.value].text);
         _settingsData.GraphicsSettings = DropdownEnumUtility.GetSelectedEnumValue<GraphicsSettingsEnum>(_graphicQualityDropdown);
     }
 
@@ -104,5 +105,28 @@ public class MainMenuUI : MonoBehaviour
                 break;
         }
         return _languageDropdown.options.FindIndex(option => option.text == cipherLanguage);
+    }
+    public string GetDropDownLanguage(string language)
+    {
+        string cipherLanguage;
+        switch (language)
+        {
+            case "English":
+                cipherLanguage = "en_US";
+                break;
+            case "Russian":
+                cipherLanguage= "ru_RU";
+                break;
+            case "Ukrainian":
+                cipherLanguage = "ua_UA";
+                break;
+            case "Spanish":
+                cipherLanguage = "es_ES";
+                break;
+            default:
+                cipherLanguage = "en_US";
+                break;
+        }
+        return cipherLanguage;
     }
 }
