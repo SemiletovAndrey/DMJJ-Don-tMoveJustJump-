@@ -4,6 +4,7 @@ using Zenject;
 public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
 {
     [SerializeField] private LoadingCurtain loadingCurtain;
+    [SerializeField] private LocalizationManager localizationManager;
     public CharacterSettings characterSettings;
 
     public override void InstallBindings()
@@ -20,6 +21,7 @@ public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
         Container.Bind<SettingsData>().AsSingle();
         
         Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
+        Container.Bind<LocalizationManager>().FromComponentInNewPrefab(localizationManager).AsSingle();
     }
 
     private void GameStateMachineBindings()

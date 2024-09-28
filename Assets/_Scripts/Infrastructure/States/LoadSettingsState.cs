@@ -9,21 +9,24 @@ public class LoadSettingsState : IState
     private readonly ISaveSettingsService _saveSettingsService;
     private SettingsData _settingsData;
     private readonly SceneLoader _sceneLoader;
+    private LocalizationManager _localizationManager;
 
 
     [Inject]
-    public LoadSettingsState(IGameStateMachine gameStateMachine, ISaveSettingsService saveSettingsService, SettingsData settingsData, SceneLoader sceneLoader)
+    public LoadSettingsState(IGameStateMachine gameStateMachine, ISaveSettingsService saveSettingsService, SettingsData settingsData, SceneLoader sceneLoader, LocalizationManager localizationManager)
     {
         _gameStateMachine = gameStateMachine;
         _saveSettingsService = saveSettingsService;
         _settingsData = settingsData;
         _sceneLoader = sceneLoader;
+        _localizationManager = localizationManager;
     }
 
     public void Enter()
     {
         Debug.Log("LoadSettingState");
         LoadProgressOrInitNew();
+        _localizationManager.CurrentLanguage = _settingsData.Language;
         _sceneLoader.Load(MainMenuName, OnLoad);
     }
 

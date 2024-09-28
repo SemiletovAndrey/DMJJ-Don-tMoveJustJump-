@@ -14,7 +14,6 @@ public class LocalizationManager : MonoBehaviour
     public event Action OnLanguageChanged;
     private List<LocalizedText> localizedTexts = new List<LocalizedText>();
 
-    [Inject] private SettingsData _settingsData;
 
     public string CurrentLanguage
     {
@@ -34,12 +33,6 @@ public class LocalizationManager : MonoBehaviour
         {
             return isReady;
         }
-    }
-
-    private void Awake()
-    {
-        _currentLanguage = _settingsData.Language;
-        LoadLocalizedText(_currentLanguage);
     }
 
     public void LoadLocalizedText(string langName)
@@ -91,7 +84,6 @@ public class LocalizationManager : MonoBehaviour
             localizedText.Add(loadedData.Items[i].Key, loadedData.Items[i].Value);
         }
         Debug.Log($"Settings data language {_currentLanguage}");
-        _settingsData.Language = _currentLanguage;
 
         isReady = true;
         OnLanguageChanged?.Invoke();

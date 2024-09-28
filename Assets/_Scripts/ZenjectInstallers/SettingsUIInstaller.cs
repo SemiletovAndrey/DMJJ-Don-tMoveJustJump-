@@ -10,7 +10,6 @@ public class SettingsUIInstaller : MonoInstaller
     public TMP_Dropdown GraphicQuality;
     public Slider LockFPS;
     public TMP_Dropdown Language;
-    public LocalizationManager LocalizationManager;
 
     public override void InstallBindings()
     {
@@ -20,6 +19,5 @@ public class SettingsUIInstaller : MonoInstaller
         Container.Bind<TMP_Dropdown>().WithId("GraphicQuality").FromInstance(GraphicQuality);
         Container.Bind<Slider>().WithId("LockFPS").FromInstance(LockFPS);
         Container.Bind<TMP_Dropdown>().WithId("Language").FromInstance(Language);
-        Container.Bind<LocalizationManager>().FromInstance(LocalizationManager);
     }
 }

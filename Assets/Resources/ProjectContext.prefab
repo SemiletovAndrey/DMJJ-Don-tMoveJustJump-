@@ -75,4 +75,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingCurtain: {fileID: 7507021197823424582, guid: d32f9ef1aceb07c468cd3dc4beb39f78, type: 3}
+  localizationManager: {fileID: 8457197094690453096, guid: ed110b4ff6dd06944861ea489d9ed820, type: 3}
   characterSettings: {fileID: 11400000, guid: 3b8d2b8b25f3eac49995ec8c6594948c, type: 2}
