@@ -59,7 +59,67 @@
     {
       "Key": "hard_restart",
       "Value": "HARD RESTART"
+    },
+    {
+      "Key": "die_text",
+      "Value": "Your shell couldn't take it \n RESTART?"
+    }
+  ],
+
+  "DialoguesScene": [
+    {
+      "SceneKey": "LevelGreen_0",
+      "Dialogues": [
+        {
+          "CharacterNameKey": "hero_name",
+          "Phrases": [
+            {
+              "DialogueTextKey": "hero_lvlGreen0_phrase_1",
+              "DialogueText": "Welcome to the first scene!"
+            },
+            {
+              "DialogueTextKey": "hero_scene1_phrase_2",
+              "DialogueText": "Let’s begin the adventure!"
+            }
+          ]
+        },
+        {
+          "CharacterNameKey": "villain_name",
+          "Phrases": [
+            {
+              "DialogueTextKey": "villain_scene1_phrase_1",
+              "DialogueText": "You will not get past me!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "SceneKey": "scene_2",
+      "Dialogues": [
+        {
+          "CharacterNameKey": "hero_name",
+          "Phrases": [
+            {
+              "DialogueTextKey": "hero_scene2_phrase_1",
+              "DialogueText": "We have made it to the second scene."
+            },
+            {
+              "DialogueTextKey": "hero_scene2_phrase_2",
+              "DialogueText": "The challenges await."
+            }
+          ]
+        },
+        {
+          "CharacterNameKey": "villain_name",
+          "Phrases": [
+            {
+              "DialogueTextKey": "villain_scene2_phrase_1",
+              "DialogueText": "I will stop you once again!"
+            }
+          ]
+        }
+      ]
     }
   ]
-
 }

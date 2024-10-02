@@ -39,8 +39,12 @@ public class EntityFactory : IEntityFactory
         else
         {
             hudPrefab = InstantiateRegistered(AssetAddress.HudMobilePath);
+
         }
-        return _container.InstantiatePrefab(hudPrefab);
+        GameObject hud = _container.InstantiatePrefab(hudPrefab);
+        DialogueUI dialogueUI = hud.GetComponentInChildren<DialogueUI>();
+        _container.Bind<DialogueUI>().FromInstance(dialogueUI).AsSingle();
+        return hud;
     }
 
     public GameObject CreateSaveTrigger(Vector3 position)

@@ -59,6 +59,10 @@
     {
       "Key": "hard_restart",
       "Value": "REINICIO DURO"
+    },
+    {
+      "Key": "die_text",
+      "Value": "Your shell couldn't take it \n RESTART?"
     }
 
   ]

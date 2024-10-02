@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 955775403854837450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SaveTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2260526793790962178}
   - component: {fileID: 2950098210261480871}
   - component: {fileID: 1086543956654047597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SaveTriggerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

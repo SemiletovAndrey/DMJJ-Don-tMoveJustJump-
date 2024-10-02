@@ -9,10 +9,13 @@ using Zenject;
 public class LocalizationManager : MonoBehaviour
 {
     private string _currentLanguage;
+    private string _dataAsJson;
     private Dictionary<string, string> localizedText;
     private static bool isReady = false;
     public event Action OnLanguageChanged;
     private List<LocalizedText> localizedTexts = new List<LocalizedText>();
+
+    private DialogueScene currentSceneDialogues;
 
 
     public string CurrentLanguage
@@ -46,7 +49,7 @@ public class LocalizationManager : MonoBehaviour
         Debug.Log($"{langName}");
         string path = $"{Application.streamingAssetsPath}/Languages/{langName}.json";
 
-        string dataAsJson = string.Empty;
+        _dataAsJson = string.Empty;
 
         if (Application.platform == RuntimePlatform.Android)
         {
@@ -55,7 +58,7 @@ public class LocalizationManager : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                dataAsJson = request.downloadHandler.text;
+                _dataAsJson = request.downloadHandler.text;
             }
             else
             {
@@ -67,7 +70,7 @@ public class LocalizationManager : MonoBehaviour
         {
             if (File.Exists(path))
             {
-                dataAsJson = File.ReadAllText(path);
+                _dataAsJson = File.ReadAllText(path);
             }
             else
             {
@@ -76,6 +79,15 @@ public class LocalizationManager : MonoBehaviour
             }
         }
 
+        LocalizedUIText(_dataAsJson);
+
+
+        isReady = true;
+        OnLanguageChanged?.Invoke();
+    }
+
+    private void LocalizedUIText(string dataAsJson)
+    {
         LocalizationData loadedData = JsonUtility.FromJson<LocalizationData>(dataAsJson);
 
         localizedText = new Dictionary<string, string>();
@@ -84,10 +96,33 @@ public class LocalizationManager : MonoBehaviour
             localizedText.Add(loadedData.Items[i].Key, loadedData.Items[i].Value);
         }
         Debug.Log($"Settings data language {_currentLanguage}");
-
-        isReady = true;
-        OnLanguageChanged?.Invoke();
     }
+
+    private void LoadCurrentSceneDialogues(string dataAsJson)
+    {
+        string sceneName = SceneStaticService.CurrentLevel();
+
+        DialogueData dialogueData = JsonUtility.FromJson<DialogueData>(dataAsJson);
+        foreach (DialogueScene dialogScene in dialogueData.DialoguesScene)
+        {
+            if (dialogScene.SceneKey == sceneName)
+            {
+                currentSceneDialogues = dialogScene;
+                Debug.Log($"Loaded dialogues for scene: {sceneName}");
+                return;
+            }
+        }
+
+        Debug.LogWarning($"No dialogues found for scene: {sceneName}");
+        currentSceneDialogues = null;
+    }
+
+    [ContextMenu("Load dialog")]
+    public void LoadCurrentSceneDialogues()
+    {
+        LoadCurrentSceneDialogues(_dataAsJson);
+    }
+
 
     public string GetLocalizedValue(string key)
     {
@@ -101,6 +136,29 @@ public class LocalizationManager : MonoBehaviour
         }
     }
 
+    public string GetDialoguePhrase(string characterKeyName, string phraseKey)
+    {
+        if (currentSceneDialogues == null)
+        {
+            Debug.LogError("No dialogues loaded for the current scene.");
+            return string.Empty;
+        }
+        foreach (DialogueItem dialogueItem in currentSceneDialogues.Dialogues)
+        {
+            if (dialogueItem.CharacterNameKey == characterKeyName)
+            {
+                foreach (PhraseItem phrase in dialogueItem.Phrases)
+                {
+                    if (phrase.DialogueTextKey == phraseKey)
+                    {
+                        return phrase.DialogueText;
+                    }
+                }
+            }
+        }
+        Debug.LogError($"Dialogue for character \"{characterKeyName}\" and phrase \"{phraseKey}\" not found.");
+        return string.Empty;
+    }
 
     public void RegisterText(LocalizedText text)
     {
