@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 public class RestartButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    [Inject] private IEventBus _eventBus;
+
     public Image backgroundImage;
     public float holdTime = 2f;
 
@@ -43,13 +46,13 @@ public class RestartButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private void RegularRestart()
     {
         backgroundImage.fillAmount = 0;
-        EventBus.OnRestart?.Invoke();
+        _eventBus.Publish("OnRestart");
     }
 
     private void HardRestart()
     {
         backgroundImage.fillAmount = 0;
-        EventBus.OnHardRestart?.Invoke();
+        _eventBus.Publish("OnHardRestart");
     }
 
     public void OnPointerDown(PointerEventData eventData)

@@ -10,6 +10,7 @@ public class RestartUI : MonoBehaviour
     [Inject] private IPersistantProgressService _persistantProgress;
     [Inject] private IGameStateMachine _gameStateMachine;
     [Inject(Id = "RestartContainer")]private RectTransform _restartRectContainer;
+    [Inject] private IEventBus _eventBus;
     private GameObject _player;
     private RestartService _restartService;
     private UIWindowAnimator _windowAnimator;
@@ -19,16 +20,19 @@ public class RestartUI : MonoBehaviour
     {
         _windowAnimator = new UIWindowAnimator(_restartRectContainer);  
         DieCanvas.gameObject.SetActive(false);
-        EventBus.OnHeroDeath += OnHeroDeath;
-        EventBus.OnRestart += Restart;
-        EventBus.OnHardRestart += HardRestart;
+    }
+    private void OnEnable()
+    {
+        _eventBus.Subscribe("OnHeroDeath", OnHeroDeath);
+        _eventBus.Subscribe("OnRestart", Restart);
+        _eventBus.Subscribe("OnHardRestart", HardRestart);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        EventBus.OnHeroDeath -= OnHeroDeath;
-        EventBus.OnRestart -= Restart;
-        EventBus.OnHardRestart -= HardRestart;
+        _eventBus.Unsubscribe("OnHeroDeath", OnHeroDeath);
+        _eventBus.Unsubscribe("OnRestart", Restart);
+        _eventBus.Unsubscribe("OnHardRestart", HardRestart);
     }
 
     public void Restart()

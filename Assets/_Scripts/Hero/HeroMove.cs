@@ -9,6 +9,7 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     private IInputService _inputService;
     private CharacterSettings _characterSettings;
     private Camera _camera;
+    private IEventBus _eventBus;
 
     [SerializeField] private bool _isJumped = false;
     [SerializeField] private bool _isTriggered = false;
@@ -16,10 +17,11 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     private Vector3 _movementVector;
 
     [Inject]
-    public void Construct(IInputService inputService, CharacterSettings characterSettings)
+    public void Construct(IInputService inputService, CharacterSettings characterSettings, IEventBus eventBus)
     {
         _inputService = inputService;
         _characterSettings = characterSettings;
+        _eventBus = eventBus;
     }
 
 
@@ -31,8 +33,8 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     private void OnEnable()
     {
         _camera = Camera.main;
-        EventBus.OnStartDialogue += PlayerControllOff;
-        EventBus.OnEndDialogue += PlayerControllOn;
+        _eventBus.Subscribe("OnStartDialogue", PlayerControllOff);
+        _eventBus.Subscribe("OnEndDialogue", PlayerControllOn);
     }
 
     private void Update()
@@ -46,10 +48,10 @@ public class HeroMove : MonoBehaviour, ISavedProgress
         ApplyMovement();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        EventBus.OnStartDialogue -= PlayerControllOff;
-        EventBus.OnEndDialogue -= PlayerControllOn;
+        _eventBus.Unsubscribe("OnStartDialogue", PlayerControllOff);
+        _eventBus.Unsubscribe("OnEndDialogue", PlayerControllOn);
     }
 
     public void UpdateProgress(PlayerProgress progress)

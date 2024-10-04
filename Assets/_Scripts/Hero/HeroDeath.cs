@@ -17,18 +17,20 @@ public class HeroDeath : MonoBehaviour
     private ChangeColorService _changeColorService;
     private CharacterSettings _characterSettings;
     private float _delayTimeDeath;
+    private IEventBus _eventBus;
 
     [Inject]
-    public void Construct(CharacterSettings characterSettings)
+    public void Construct(CharacterSettings characterSettings, IEventBus eventBus)
     {
         _characterSettings = characterSettings;
+        _eventBus = eventBus;
     }
 
     private void Start()
     {
         _renderers = gameObject.GetComponentsInChildren<Renderer>();
         OnDeath += OnDeathHandler;
-        EventBus.OnHeroDeath += Die;
+        _eventBus.Subscribe("OnHeroDeath", Die);
         _changeColorService = new ChangeColorService(_renderers, _characterSettings.HeroDeathColor);
         _shakingObjectService = new ShakingObjectService(transformShaking, _characterSettings.MaxShakeAmount, _characterSettings.FrequencyDeath);
         _delayTimeDeath = _characterSettings.DelayTimeDeath;
@@ -42,7 +44,7 @@ public class HeroDeath : MonoBehaviour
     private void OnDestroy()
     {
         OnDeath -= OnDeathHandler;
-        EventBus.OnHeroDeath -= Die;
+        _eventBus.Unsubscribe("OnHeroDeath", Die);
     }
 
     public void OnCollisionStay(Collision collision)
@@ -107,7 +109,7 @@ public class HeroDeath : MonoBehaviour
         Debug.Log("Die");
         _shakingObjectService.ResetPosition();
         StopCoroutine(_coroutineDeath);
-        EventBus.OnHeroDeath?.Invoke();
+        _eventBus.Publish("OnHeroDeath");
     }
 
     public void ResetColor()

@@ -1,25 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class HUDController : MonoBehaviour
 {
     [SerializeField] private GameObject Controller;
     [SerializeField] private GameObject DialoguePanel;
 
+    [Inject] private IEventBus _eventBus;
+
     private void Start()
     {
         Controller.SetActive(true);
         DialoguePanel.SetActive(false);
-
-        EventBus.OnStartDialogue += OnDialoguePanelOn;
-        EventBus.OnEndDialogue += OnControllerOn;
+    }
+    private void OnEnable()
+    {
+        _eventBus.Subscribe("OnStartDialogue", OnDialoguePanelOn);
+        _eventBus.Subscribe("OnEndDialogue", OnControllerOn);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        EventBus.OnStartDialogue -= OnDialoguePanelOn;
-        EventBus.OnEndDialogue -= OnControllerOn;
+        _eventBus.Unsubscribe("OnStartDialogue", OnDialoguePanelOn);
+        _eventBus.Unsubscribe("OnEndDialogue", OnControllerOn);
     }
 
     public void OnDialoguePanelOn()

@@ -22,6 +22,8 @@ public class ProjectContextInstaller : MonoInstaller, ICoroutineRunner
         
         Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
         Container.Bind<LocalizationManager>().FromComponentInNewPrefab(localizationManager).AsSingle();
+
+        Container.Bind<IEventBus>().To<EventBus>().AsSingle();
     }
 
     private void GameStateMachineBindings()

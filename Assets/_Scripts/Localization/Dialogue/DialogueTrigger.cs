@@ -20,6 +20,7 @@ public class DialogueTrigger : MonoBehaviour
 
     [Inject] private LocalizationManager localizationManager;
     [Inject] private DiContainer container;
+    [Inject] private IEventBus eventBus;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -33,7 +34,7 @@ public class DialogueTrigger : MonoBehaviour
     [ContextMenu("Play dialog")]
     private void StartDialogue()
     {
-        EventBus.OnStartDialogue?.Invoke();
+        eventBus.Publish("OnStartDialogue");
         dialogueUI = container.Resolve<DialogueUI>();
         dialogueUI.ClearDialogue();
         if (dialogueCoroutine == null)
@@ -50,10 +51,7 @@ public class DialogueTrigger : MonoBehaviour
 
             if (!string.IsNullOrEmpty(dialogueText))
             {
-                // ќтображение текста на экране
                 DisplayDialogue(sequence.characterNameKey, dialogueText);
-
-                // ќжидание перед воспроизведением следующей фразы
                 yield return new WaitForSeconds(delayBetweenPhrases);
             }
         }
@@ -68,8 +66,7 @@ public class DialogueTrigger : MonoBehaviour
     private void OnDialogueComplete()
     {
         dialogueCoroutine = null;
-        Debug.Log("Dialogue sequence completed.");
-        EventBus.OnEndDialogue?.Invoke();
+        eventBus.Publish("OnEndDialogue");
     }
 
 }
