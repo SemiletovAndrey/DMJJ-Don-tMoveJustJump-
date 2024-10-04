@@ -6,6 +6,5 @@ using UnityEngine;
 [Serializable]
 public class DialogueScene
 {
-    public string SceneKey;
-    public DialogueItem[] Dialogues;
+    public Dictionary<string, DialogueItem> Dialogues;
 }

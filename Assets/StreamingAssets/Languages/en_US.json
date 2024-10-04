@@ -65,61 +65,31 @@
       "Value": "Your shell couldn't take it \n RESTART?"
     }
   ],
-
-  "DialoguesScene": [
-    {
-      "SceneKey": "LevelGreen_0",
-      "Dialogues": [
-        {
-          "CharacterNameKey": "hero_name",
-          "Phrases": [
-            {
-              "DialogueTextKey": "hero_lvlGreen0_phrase_1",
-              "DialogueText": "Welcome to the first scene!"
-            },
-            {
-              "DialogueTextKey": "hero_scene1_phrase_2",
-              "DialogueText": "Let’s begin the adventure!"
-            }
-          ]
+  "DialogueScene": {
+    "LevelGreen_0": {
+      "Dialogues": {
+        "Hero": {
+          "Phrases": {
+            "greeting": "Hello!",
+            "question": "How are you?"
+          }
         },
-        {
-          "CharacterNameKey": "villain_name",
-          "Phrases": [
-            {
-              "DialogueTextKey": "villain_scene1_phrase_1",
-              "DialogueText": "You will not get past me!"
-            }
-          ]
+        "Guru": {
+          "Phrases": {
+            "response": "I'm fine, thanks!",
+            "farewell": "Goodbye!"
+          }
         }
-      ]
+      }
     },
-    {
-      "SceneKey": "scene_2",
-      "Dialogues": [
-        {
-          "CharacterNameKey": "hero_name",
-          "Phrases": [
-            {
-              "DialogueTextKey": "hero_scene2_phrase_1",
-              "DialogueText": "We have made it to the second scene."
-            },
-            {
-              "DialogueTextKey": "hero_scene2_phrase_2",
-              "DialogueText": "The challenges await."
-            }
-          ]
-        },
-        {
-          "CharacterNameKey": "villain_name",
-          "Phrases": [
-            {
-              "DialogueTextKey": "villain_scene2_phrase_1",
-              "DialogueText": "I will stop you once again!"
-            }
-          ]
+    "Scene2": {
+      "Dialogues": {
+        "Character3": {
+          "Phrases": {
+            "introduction": "Nice to meet you."
+          }
         }
-      ]
+      }
     }
-  ]
+  }
 }

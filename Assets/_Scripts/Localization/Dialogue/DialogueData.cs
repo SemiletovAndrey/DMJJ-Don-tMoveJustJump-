@@ -5,5 +5,5 @@ using System;
 [Serializable]
 public class DialogueData
 {
-    public DialogueScene[] DialoguesScene;
+    public Dictionary<string, DialogueScene> DialogueScene;
 }

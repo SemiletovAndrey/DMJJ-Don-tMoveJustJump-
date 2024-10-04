@@ -5,6 +5,5 @@ using System;
 [Serializable]
 public class DialogueItem
 {
-    public string CharacterNameKey;
-    public PhraseItem[] Phrases;
+    public Dictionary<string, string> Phrases;
 }

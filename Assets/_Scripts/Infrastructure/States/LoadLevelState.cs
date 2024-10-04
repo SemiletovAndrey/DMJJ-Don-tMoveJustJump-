@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class LoadLevelState : BaseLoadLevelState, IPayloadState<string>
@@ -8,8 +6,8 @@ public class LoadLevelState : BaseLoadLevelState, IPayloadState<string>
     private readonly LoadingCurtain _curtain;
 
     [Inject]
-    public LoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, DiContainer container, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService, LoadingCurtain curtain)
-        : base(gameStateMachine, sceneLoader, container, entityFactory, progressService, staticDataService)
+    public LoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, DiContainer container, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService, LoadingCurtain curtain, LocalizationManager localizationManager)
+        : base(gameStateMachine, sceneLoader, container, entityFactory, progressService, staticDataService, localizationManager)
     {
         _curtain = curtain;
     }
@@ -36,7 +34,7 @@ public class LoadLevelState : BaseLoadLevelState, IPayloadState<string>
         InitLevelTransfer(levelData);
         CameraFollow(player);
         InformProgressReaders();
-
+        LoadDialoguesOnScene();
         _gameStateMachine.Enter<GameLoopState>();
     }
 

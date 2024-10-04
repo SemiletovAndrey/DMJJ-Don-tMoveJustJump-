@@ -9,8 +9,8 @@ public class NextLevelTransferState : BaseLoadLevelState, IPayloadState<string>
     private string nextSceneName;
 
     [Inject]
-    public NextLevelTransferState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, DiContainer container, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService)
-        : base(gameStateMachine, sceneLoader, container, entityFactory, progressService, staticDataService)
+    public NextLevelTransferState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, DiContainer container, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService, LocalizationManager localizationManager)
+        : base(gameStateMachine, sceneLoader, container, entityFactory, progressService, staticDataService, localizationManager)
     {
     }
 
@@ -29,7 +29,7 @@ public class NextLevelTransferState : BaseLoadLevelState, IPayloadState<string>
         GameObject player = RestartPlayer(levelData);
         InitSaveTrigger(levelData);
         InitLevelTransfer(levelData);
-
+        LoadDialoguesOnScene();
         _gameStateMachine.Enter<GameLoopState>();
         player.SetActive(true);
     }

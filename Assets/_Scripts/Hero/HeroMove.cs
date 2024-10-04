@@ -31,6 +31,8 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     private void OnEnable()
     {
         _camera = Camera.main;
+        EventBus.OnStartDialogue += PlayerControllOff;
+        EventBus.OnEndDialogue += PlayerControllOn;
     }
 
     private void Update()
@@ -42,6 +44,12 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     private void FixedUpdate()
     {
         ApplyMovement();
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.OnStartDialogue -= PlayerControllOff;
+        EventBus.OnEndDialogue -= PlayerControllOn;
     }
 
     public void UpdateProgress(PlayerProgress progress)
@@ -130,5 +138,14 @@ public class HeroMove : MonoBehaviour, ISavedProgress
                 RbPlayer.AddForce(_movementVector * _characterSettings.MovementForceOnAir, ForceMode.Force);
             }
         }
+    }
+
+    public void PlayerControllOn()
+    {
+        this.enabled = true;
+    }
+    public void PlayerControllOff()
+    {
+        this.enabled = false;
     }
 }

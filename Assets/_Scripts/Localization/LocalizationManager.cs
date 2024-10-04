@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
-using Zenject;
+using Newtonsoft.Json;
 
 public class LocalizationManager : MonoBehaviour
 {
@@ -101,20 +101,17 @@ public class LocalizationManager : MonoBehaviour
     private void LoadCurrentSceneDialogues(string dataAsJson)
     {
         string sceneName = SceneStaticService.CurrentLevel();
-
-        DialogueData dialogueData = JsonUtility.FromJson<DialogueData>(dataAsJson);
-        foreach (DialogueScene dialogScene in dialogueData.DialoguesScene)
+        DialogueData dialogueData = JsonConvert.DeserializeObject<DialogueData>(dataAsJson);
+        if (dialogueData.DialogueScene.TryGetValue(sceneName, out DialogueScene dialogScene))
         {
-            if (dialogScene.SceneKey == sceneName)
-            {
-                currentSceneDialogues = dialogScene;
-                Debug.Log($"Loaded dialogues for scene: {sceneName}");
-                return;
-            }
+            currentSceneDialogues = dialogScene;
+            Debug.Log($"Loaded dialogues for scene: {sceneName}");
         }
-
-        Debug.LogWarning($"No dialogues found for scene: {sceneName}");
-        currentSceneDialogues = null;
+        else
+        {
+            Debug.LogWarning($"No dialogues found for scene: {sceneName}");
+            currentSceneDialogues = null;
+        }
     }
 
     [ContextMenu("Load dialog")]
@@ -122,7 +119,6 @@ public class LocalizationManager : MonoBehaviour
     {
         LoadCurrentSceneDialogues(_dataAsJson);
     }
-
 
     public string GetLocalizedValue(string key)
     {
@@ -143,20 +139,23 @@ public class LocalizationManager : MonoBehaviour
             Debug.LogError("No dialogues loaded for the current scene.");
             return string.Empty;
         }
-        foreach (DialogueItem dialogueItem in currentSceneDialogues.Dialogues)
+
+        if (currentSceneDialogues.Dialogues.TryGetValue(characterKeyName, out DialogueItem dialogueItem))
         {
-            if (dialogueItem.CharacterNameKey == characterKeyName)
+            if (dialogueItem.Phrases.TryGetValue(phraseKey, out string dialogueText))
             {
-                foreach (PhraseItem phrase in dialogueItem.Phrases)
-                {
-                    if (phrase.DialogueTextKey == phraseKey)
-                    {
-                        return phrase.DialogueText;
-                    }
-                }
+                return dialogueText;
+            }
+            else
+            {
+                Debug.LogError($"Phrase \"{phraseKey}\" not found for character \"{characterKeyName}\".");
             }
         }
-        Debug.LogError($"Dialogue for character \"{characterKeyName}\" and phrase \"{phraseKey}\" not found.");
+        else
+        {
+            Debug.LogError($"Character \"{characterKeyName}\" not found.");
+        }
+
         return string.Empty;
     }
 

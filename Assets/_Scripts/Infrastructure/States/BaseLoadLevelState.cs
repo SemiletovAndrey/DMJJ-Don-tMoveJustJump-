@@ -11,8 +11,9 @@ public abstract class BaseLoadLevelState
     protected IEntityFactory _entityFactory;
     protected IPersistantProgressService _progressService;
     protected IStaticDataService _staticDataService;
+    protected LocalizationManager _localizationManager;
 
-    protected BaseLoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, DiContainer container, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService)
+    protected BaseLoadLevelState(IGameStateMachine gameStateMachine, SceneLoader sceneLoader, DiContainer container, IEntityFactory entityFactory, IPersistantProgressService progressService, IStaticDataService staticDataService, LocalizationManager localizationManager)
     {
         _gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
@@ -20,6 +21,7 @@ public abstract class BaseLoadLevelState
         _entityFactory = entityFactory;
         _progressService = progressService;
         _staticDataService = staticDataService;
+        _localizationManager = localizationManager;
     }
 
     protected void CameraFollow(GameObject hero)
@@ -66,4 +68,11 @@ public abstract class BaseLoadLevelState
             _entityFactory.CreateSaveTrigger(levelData.Checkpoints[positionIndex]);
         }
     }
+
+    protected void LoadDialoguesOnScene()
+    {
+        _localizationManager.LoadCurrentSceneDialogues();
+    }
+
+
 }

@@ -2669,10 +2669,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DieMenu_canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 182245977669795093, guid: 2a800654fbecd3b4f82628842390b46b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1778693531818469909, guid: 2a800654fbecd3b4f82628842390b46b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2752,10 +2748,6 @@ PrefabInstance:
     - target: {fileID: 1778693531818469909, guid: 2a800654fbecd3b4f82628842390b46b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2282922521818607177, guid: 2a800654fbecd3b4f82628842390b46b, type: 3}
-      propertyPath: m_Name
-      value: DieContainerCenter
       objectReference: {fileID: 0}
     - target: {fileID: 4579591337781864227, guid: 2a800654fbecd3b4f82628842390b46b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -9833,8 +9825,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueSequences:
-  - characterNameKey: hero_name
-    dialogueKey: hero_lvlGreen0_phrase_1
+  - characterNameKey: Hero
+    dialogueKey: greeting
+  - characterNameKey: Guru
+    dialogueKey: response
   delayBetweenPhrases: 2
 --- !u!4 &687683938
 Transform:
@@ -19471,10 +19465,6 @@ PrefabInstance:
     - target: {fileID: 6195246906532279159, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
       propertyPath: m_Name
       value: MenuPause_canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6195246906532279159, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7281325606666122471, guid: 75beccb39b5032d4e86bfae37c0c8782, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

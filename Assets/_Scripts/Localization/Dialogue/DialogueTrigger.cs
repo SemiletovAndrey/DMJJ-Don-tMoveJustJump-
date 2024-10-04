@@ -35,7 +35,6 @@ public class DialogueTrigger : MonoBehaviour
     {
         EventBus.OnStartDialogue?.Invoke();
         dialogueUI = container.Resolve<DialogueUI>();
-        Debug.Log($"DialogueUI {dialogueUI.gameObject.name}");
         dialogueUI.ClearDialogue();
         if (dialogueCoroutine == null)
         {
@@ -58,8 +57,6 @@ public class DialogueTrigger : MonoBehaviour
                 yield return new WaitForSeconds(delayBetweenPhrases);
             }
         }
-
-        // ѕосле завершени€ диалога
         OnDialogueComplete();
     }
 
@@ -68,8 +65,6 @@ public class DialogueTrigger : MonoBehaviour
         Debug.Log($"[{characterNameKey}]: {dialogueText}");
         dialogueUI.UpdateDialogue(characterNameKey, dialogueText);
     }
-
-    // ћетод, который срабатывает после завершени€ всех диалогов
     private void OnDialogueComplete()
     {
         dialogueCoroutine = null;
