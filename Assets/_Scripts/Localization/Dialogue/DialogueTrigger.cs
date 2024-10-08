@@ -14,19 +14,23 @@ public class DialogueTrigger : MonoBehaviour
 {
     public DialogueSequence[] dialogueSequences;
     public float delayBetweenPhrases = 2f;
-    private Coroutine dialogueCoroutine;
-    private bool isPlayerInZone = false;
-    private DialogueUI dialogueUI;
 
-    [Inject] private LocalizationManager localizationManager;
-    [Inject] private DiContainer container;
-    [Inject] private IEventBus eventBus;
+    private Coroutine _dialogueCoroutine;
+    private bool _isPlayerInZone = false;
+    private DialogueUI _dialogueUI;
+
+    private int currentDialogueIndex = 0;
+    private bool waitingForNextPhrase = false;
+
+    [Inject] private LocalizationManager _localizationManager;
+    [Inject] private DiContainer _container;
+    [Inject] private IEventBus _eventBus;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isPlayerInZone)
+        if (other.CompareTag("Player") && !_isPlayerInZone)
         {
-            isPlayerInZone = true;
+            _isPlayerInZone = true;
             StartDialogue();
         }
     }
@@ -34,39 +38,59 @@ public class DialogueTrigger : MonoBehaviour
     [ContextMenu("Play dialog")]
     private void StartDialogue()
     {
-        eventBus.Publish("OnStartDialogue");
-        dialogueUI = container.Resolve<DialogueUI>();
-        dialogueUI.ClearDialogue();
-        if (dialogueCoroutine == null)
+        _eventBus.Publish("OnStartDialogue");
+        _dialogueUI = _container.Resolve<DialogueUI>();
+        if (_dialogueCoroutine == null)
         {
-            dialogueCoroutine = StartCoroutine(PlayDialogueSequence());
+            _dialogueCoroutine = StartCoroutine(PlayDialogueSequence());
+            _eventBus.Subscribe("OnClickDuringDialogue", OnScreenClick);
         }
     }
 
     private IEnumerator PlayDialogueSequence()
     {
-        foreach (var sequence in dialogueSequences)
+        while (currentDialogueIndex < dialogueSequences.Length)
         {
-            string dialogueText = localizationManager.GetDialoguePhrase(sequence.characterNameKey, sequence.dialogueKey);
+            var sequence = dialogueSequences[currentDialogueIndex];
+            string dialogueText = _localizationManager.GetDialoguePhrase(sequence.characterNameKey, sequence.dialogueKey);
 
             if (!string.IsNullOrEmpty(dialogueText))
             {
+                waitingForNextPhrase = true;
                 DisplayDialogue(sequence.characterNameKey, dialogueText);
-                yield return new WaitForSeconds(delayBetweenPhrases);
+                yield return new WaitUntil(() => !waitingForNextPhrase);
             }
+
+            yield return null;
         }
+
         OnDialogueComplete();
+    }
+
+    public void OnScreenClick()
+    {
+        if (_dialogueUI.IsTyping)
+        {
+            _dialogueUI.SkipTyping();
+        }
+        else
+        {
+            _dialogueUI.ContinueTextOff();
+            waitingForNextPhrase = false;
+            currentDialogueIndex++;
+        }
     }
 
     private void DisplayDialogue(string characterNameKey, string dialogueText)
     {
         Debug.Log($"[{characterNameKey}]: {dialogueText}");
-        dialogueUI.UpdateDialogue(characterNameKey, dialogueText);
+        _dialogueUI.UpdateDialogue(characterNameKey, dialogueText);
     }
     private void OnDialogueComplete()
     {
-        dialogueCoroutine = null;
-        eventBus.Publish("OnEndDialogue");
+        _dialogueCoroutine = null;
+        _eventBus.Publish("OnEndDialogue");
+        _eventBus.Unsubscribe("OnClickDuringDialogue", OnScreenClick);
     }
 
 }

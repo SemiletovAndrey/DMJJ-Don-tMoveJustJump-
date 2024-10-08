@@ -5,9 +5,6 @@ public class EventBus : IEventBus
 {
     private readonly Dictionary<string, Action> _eventDictionary = new Dictionary<string, Action>();
 
-
-    public static Action OnEndDialogue;
-
     public void Subscribe(string eventType, Action listener)
     {
         if (!_eventDictionary.ContainsKey(eventType))

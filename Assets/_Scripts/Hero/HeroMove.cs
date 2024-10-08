@@ -48,7 +48,7 @@ public class HeroMove : MonoBehaviour, ISavedProgress
         ApplyMovement();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _eventBus.Unsubscribe("OnStartDialogue", PlayerControllOff);
         _eventBus.Unsubscribe("OnEndDialogue", PlayerControllOn);
@@ -145,6 +145,7 @@ public class HeroMove : MonoBehaviour, ISavedProgress
     public void PlayerControllOn()
     {
         this.enabled = true;
+        Debug.Log("Player controller on");
     }
     public void PlayerControllOff()
     {
